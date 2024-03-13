@@ -67,39 +67,52 @@ session_start();
                 <!--The form for assigning priority level adn assigning to an officer-->
                 <br>
                 <br>
-                <form action="AASPL.php" method="post">
-                    <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
-                    
-                    <label for="officer_id">Assign to Officer:</label>
-                    <select name="officer_id" required>
-                        <option value="">Select Officer</option>
-                        <?php 
-                            // Fetch officers from the database
-                            require_once 'DatabaseConn.php';
-                            $query = "SELECT ID, Email FROM admindetails WHERE Role = 'officer'";
-                            $stmt = $conn->prepare($query);
-                            $stmt->execute();
-                            $officers = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-                            $stmt->close();
-                            
-                            foreach($officers as $officer): 
-                        ?>
-                            <option value="<?php echo $officer['ID']; ?>"><?php echo $officer['Email']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    
-                    <label for="priority_level">Priority Level:</label>
-                    <select name="priority_level" required>
-                        <option value="">Select Priority Level</option>
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
-                    </select>
-                    
-                    <input class="btn btn-primary float-right" type="submit" value="Assign and Set Priority">
-                </form>
+                <?php
+// Check if the admin session is set
+if (isset($_SESSION['admin_id'])) {
+?>
+
+<form action="AASPL.php" method="post">
+    <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
+
+    <label for="officer_id">Assign to Officer:</label>
+    <select name="officer_id" required>
+        <option value="">Select Officer</option>
+        <?php
+        // Fetch officers from the database
+        require_once 'DatabaseConn.php';
+        $query = "SELECT ID, Email FROM admindetails WHERE Role = 'officer'";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $officers = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+
+        foreach ($officers as $officer) {
+            echo '<option value="' . $officer['ID'] . '">' . $officer['Email'] . '</option>';
+        }
+        ?>
+    </select>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <label for="priority_level">Priority Level:</label>
+    <select name="priority_level" required>
+        <option value="">Select Priority Level</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+    </select>
+
+    <input class="btn btn-primary float-right" type="submit" value="Assign and Set Priority">
+</form>
+
+<?php
+} else {
+    // Do not show the form for any other case
+}
+?>
+
+
                         </div>
                     </div>                    
                 </div>                
@@ -119,3 +132,4 @@ session_start();
         </div>    
 </body>
 </html>
+
