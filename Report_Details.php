@@ -31,6 +31,9 @@ session_start();
         ?>
         <!-- end side bar thing -->
         <div class="page-wrapper">
+            <?php
+            echo "Officer ID from Session: " . $_SESSION["officer_id"];
+            ?>
             <div class="content">
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-8 col-xl-8">
@@ -41,6 +44,7 @@ session_start();
 							</div>
                             <div class="card-body -0">
                        <?php
+                       
                     require_once 'DatabaseConn.php';
                     $report_id = $_GET['report_id'];
 

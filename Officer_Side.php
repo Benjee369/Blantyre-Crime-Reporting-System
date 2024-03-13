@@ -100,7 +100,9 @@ session_start();
                         </div>
                     </div>
                 </div>
-				
+				<?php
+            echo "Officer ID from Session: " . $_SESSION["officer_id"];
+            ?>
 				<div class="row">
 					<div class="">
 						<div class="card">
