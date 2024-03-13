@@ -1,0 +1,88 @@
+<?php
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+session_start();
+
+require_once 'DatabaseConn.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $Email = $_POST["useremail"];
+    $Password = $_POST["userpassword"];
+    $Role = $_POST["userrole"]; // Assuming the role is set in a dropdown/select menu
+
+    $checkStmt = $conn->prepare("SELECT ID, Email FROM admindetails WHERE Email = ?");
+    $checkStmt->bind_param("s", $Email);
+    $checkStmt->execute();
+    $checkResult = $checkStmt->get_result();
+
+    if ($checkResult->num_rows > 0) {
+        $_SESSION['Email_address_taken'] = true;
+        header("Location: createadmin.php");
+        exit();
+    } else {
+        $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
+        $insertStmt = $conn->prepare("INSERT INTO admindetails (Email, Password, Role) VALUES (?, ?, ?)");
+        $insertStmt->bind_param("sss", $Email, $hashedPassword, $Role);
+
+        if ($insertStmt->execute()) {
+            echo "<div class='successfully_created'>
+            <p>You have successfully registered</p>
+            <a href='Login.php'><strong>Go to the login page</strong></a>
+            </div>";
+        } else {
+            echo "Error: " . $insertStmt->error;
+        }
+    }
+
+    $checkStmt->close();
+    $insertStmt->close();
+    $conn->close();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <title>Create Account</title>
+</head>
+<body>
+    <header>
+        <?php require_once 'nvbr.php'; ?>
+    </header>
+    <main>
+        <div class="parent clearfix">
+            <div class="login">
+                <div class="container">
+                    <h1>Create an account to <br />easily submit crime reports</h1>
+                    <?php
+                    if (isset($_SESSION['Email_address_taken']) && $_SESSION['Email_address_taken']) {
+                        echo "<p class='wrong_details'>This Email Address is already taken.<br> Please try a different Email Address</p>";
+                    }
+                    ?>
+                    <div class="login-form">
+                        <form action="" method="POST">
+                            <input type="email" name="useremail" placeholder="E-mail Address" required>
+                            <input type="password" name="userpassword" placeholder="Password" required>
+                            <label for="userrole">Select Role:</label>
+                            <select id="userrole" name="userrole">
+                                <option value="admin">Admin</option>
+                                <option value="officer">Officer</option>
+                            </select>
+                            <button type="submit">Create Account</button>
+                            <hr class="line-thing2">
+                            <p>Already Have an Account? <a class="create_log_btn">Login</a></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <?php require_once 'Footer.php'; ?>
+    </footer>
+</body>
+</html>
