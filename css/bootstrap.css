@@ -4555,6 +4555,10 @@ input[type="button"].btn-block {
   color: #fff;
 }
 
+.main-card-thing{
+  width: 100%;
+}
+
 .card {
   position: relative;
   display: -ms-flexbox;
@@ -4562,6 +4566,7 @@ input[type="button"].btn-block {
   -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
+  width: 100%;
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;

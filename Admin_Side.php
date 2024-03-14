@@ -34,13 +34,12 @@ session_start();
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                <div class="col-md-6 col-lg-6 col-xl-4">
                     <div class="dash-widget">   
                         <div class="dash-widget-info text-right">
                         <?php
                             require_once 'DatabaseConn.php';
 
-                            // Fetch total number of crimes reported
                             $query_total_crimes = "SELECT COUNT(*) AS total_crimes FROM crimereports";
                             $stmt_total_crimes = $conn->prepare($query_total_crimes);
                             $stmt_total_crimes->execute();
@@ -52,8 +51,6 @@ session_start();
                             } else {
                                 echo '<h3>0</h3>'; // Default value if no data available
                             }
-
-                            // Close the statement after using the result set
                             $stmt_total_crimes->close();
                         ?>
 
@@ -63,7 +60,7 @@ session_start();
                 </div>
 
 
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                    <div class="col-md-6 col-lg-6 col-xl-4">
                         <div class="dash-widget">
                             <div class="dash-widget-info text-right">
                             <?php
@@ -88,7 +85,7 @@ session_start();
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                    <div class="col-md-6 col-lg-6 col-xl-4">
                         <div class="dash-widget">
                             <div class="dash-widget-info text-right">
                                 <h3>72</h3>
@@ -99,7 +96,7 @@ session_start();
                 </div>
 				
 				<div class="row">
-					<div class="">
+					<div class="main-card-thing">
 						<div class="card">
 							<div class="card-header">
 								<h4 class="card-title d-inline-block">Latest Reports</h4> <a href="appointments.php" class="btn btn-primary float-right">View all</a>
