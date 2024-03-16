@@ -184,7 +184,7 @@ session_start();
   <!-- footer section -->
    <Footer class="info_section">
     <?php
-    require_once'Footer.php';
+    require_once 'Footer.php';
     ?>
   </Footer>
   <!-- footer section -->

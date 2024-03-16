@@ -995,10 +995,13 @@ img {
   font-weight: bolder;
 }
 
-
+.success{
+  color: rgb(0, 211, 0);
+  font-size: 20px;
+}
 .wrong_details{
   color: red;
-  font-size: 15px;
+  font-size: 20px;
 }
 .login .container .login-form form p{
   margin-left: auto;
