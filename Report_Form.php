@@ -30,15 +30,19 @@ session_start();
         <h1>Police Report Form</h1>
         <p>If you have witnessed an incident that files under police attribution, please use this online police report form to signalize it.
              The police will review the report and take the appropriate action. Thank you for being a responsible citizen.</p>
-        <div class="report-detail">
+        
+          <div class="report-detail">
+
           <form action="Submit_Report.php" method="post" enctype="multipart/form-data">
+            <hr>
             <div class="report_detail">
-                <p>Name of the person reporting the incident</p>
+                <p class="report_form_label">Name of the person reporting the incident</p>
                 <input type="text" placeholder="First" name="firstname">
                 <input type="text" placeholder="Last" name="lastname">
             </div>
+            <hr>
             <div class="report_detail">
-              <p>Select Incident Category</p>
+              <p class="report_form_label">Select Incident Category</p>
             <select name="incidentCategory" class="incident_field">
                 <option value="Traffic Accident">Traffic Accident</option>
                 <option value="Theft">Theft</option>
@@ -48,48 +52,53 @@ session_start();
                 <option value="Missing Person">Missing Person</option>
             </select>
             </div>
+            <hr>
             <div class="mixture">
               <div class="report_detai">
-                  <p>Date when you witnessed the incident</p>
+                  <p class="report_form_label">Date when you witnessed the incident</p>
                   <input type="Date" name="witnesseddate">
               </div>
+
               <div class="report_detai">
-                <p>Time of Incident</p>
+                <p class="report_form_label">Time of Incident</p>
                 <input type="time" name="witnesstime">
               </div>
-            </div>
-            
-
+            </div>            
+            <hr>
             <div class="report_detail">
-              <p>Please Describe the Incident</p>
+              <p class="report_form_label">Please Describe the Incident</p>
               <textarea name="incidentDescription" required></textarea>
             </div>
 
             <div class="mixture">
                 <div class="report_detai">
-                  <p>How many people were involved?</p>
+                  <p class="report_form_label">How many people were involved?</p>
                   <input type="number" name="peopleInvolved">
                 </div>
+
                 <div class="report_detai">
-                  <p>Were you in any way affected by the incident?</p>
+                  <p class="report_form_label">Were you in any way affected by the incident?</p>
                   <input type="radio" name="ifAffected" value="Yes">
                   <label for="html">Yes</label><br>
                   <input type="radio" name="ifAffected" value="No">
                   <label for="css">No</label><br>
                 </div>
             </div>
-            
-
+            <hr>
             <!-- AIzaSyDrgDeZC_XKO9aq5nrEeVHaTkLF5Cm-vts -->
             <div class="report_detail">
-              <p>Multimedia Attchment</p>
+              <p class="report_form_label">Multimedia Attchment</p>
               <input type="file" id="image"  placeholder="Image" name="file" class="entry"  accept="image/*" required><br>
-            </div>            
-            <div id="map" style="height: 400px;"></div>
+            </div> 
+            <hr>
+            <div id="map">
+
+            </div>
 
             <!-- Coordinates input -->
             <label for="coordinates">Coordinates:</label>
             <input type="text" id="coordinates" name="coordinates" readonly>
+            <br>
             <button type="submit">Submit Report</button>
           </form>
         </div>

@@ -52,7 +52,7 @@ body {
   content: "";
   width: 40px;
   height: 7px;
-  background-color: #f1db25;
+  background-color: #a9a89a;
   border-radius: 10px;
   position: absolute;
   bottom: 0;
@@ -173,7 +173,7 @@ body {
 
 .header_top .contact_link-container a i {
   font-size: 20px;
-  color: #f1db25;
+  color: #a9a89a;
   margin-right: 5px;
 }
 
@@ -338,7 +338,7 @@ a:focus {
 }
 
 .slider_section .detail-box h1 span {
-  color: #f1db25;
+  color: #a9a89a;
 }
 
 .slider_section .detail-box p {
@@ -377,7 +377,7 @@ a:focus {
 .slider_section .detail-box .btn-box .btn-2 {
   display: inline-block;
   padding: 10px 35px;
-  background-color: #f1db25;
+  background-color: #a9a89a;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -386,8 +386,8 @@ a:focus {
 
 .slider_section .detail-box .btn-box .btn-2:hover {
   background-color: transparent;
-  border-color: #f1db25;
-  color: #f1db25;
+  border-color: #a9a89a;
+  color: #a9a89a;
 }
 
 .slider_section .img-box {
@@ -417,7 +417,7 @@ a:focus {
   height: 20px;
   border-radius: 100%;
   text-align: center;
-  background-color: #f1db25;
+  background-color: #a9a89a;
   opacity: 1;
   border: none;
   margin: 0 4px;
@@ -453,7 +453,7 @@ a:focus {
 .about_section .detail-box a {
   display: inline-block;
   padding: 10px 35px;
-  background-color: #f1db25;
+  background-color: #a9a89a;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -463,8 +463,8 @@ a:focus {
 
 .about_section .detail-box a:hover {
   background-color: transparent;
-  border-color: #f1db25;
-  color: #f1db25;
+  border-color: #a9a89a;
+  color: #a9a89a;
 }
 
 .service_section {
@@ -504,7 +504,7 @@ a:focus {
 .service_section .box .detail-box a {
   display: inline-block;
   padding: 8px 35px;
-  background-color: #f1db25;
+  background-color: #a9a89a;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -514,8 +514,8 @@ a:focus {
 
 .service_section .box .detail-box a:hover {
   background-color: transparent;
-  border-color: #f1db25;
-  color: #f1db25;
+  border-color: #a9a89a;
+  color: #a9a89a;
 }
 
 .client_section {
@@ -600,7 +600,7 @@ a:focus {
 
 .client_section .carousel-control-prev:hover,
 .client_section .carousel-control-next:hover {
-  background-color: #f1db25;
+  background-color: #a9a89a;
 }
 
 .client_section .carousel-control-prev {
@@ -676,7 +676,7 @@ a:focus {
 .contact_section .contact_form-container button {
   display: inline-block;
   padding: 10px 60px;
-  background-color: #f1db25;
+  background-color: #a9a89a;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -687,8 +687,8 @@ a:focus {
 
 .contact_section .contact_form-container button:hover {
   background-color: transparent;
-  border-color: #f1db25;
-  color: #f1db25;
+  border-color: #a9a89a;
+  color: #a9a89a;
 }
 
 .contact_bg_box {
@@ -775,7 +775,7 @@ a:focus {
 .team_section .btn-box a {
   display: inline-block;
   padding: 10px 45px;
-  background-color: #f1db25;
+  background-color: #a9a89a;
   color: #ffffff;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -784,14 +784,14 @@ a:focus {
 
 .team_section .btn-box a:hover {
   background-color: transparent;
-  border-color: #f1db25;
-  color: #f1db25;
+  border-color: #a9a89a;
+  color: #a9a89a;
 }
 
 .info_section {
   background-color: #101010;
   color: #ffffff;
-  padding: 75px 0 10px 0;
+  padding: 40px 0 10px 0;
 }
 
 .info_section .row > div {
@@ -871,7 +871,7 @@ a:focus {
   outline: none;
   border: none;
   color: #ffffff;
-  background: #f1db25;
+  background: #a9a89a;
   border-radius: 30px;
   margin-top: 15px;
   text-transform: uppercase;
@@ -985,12 +985,12 @@ img {
   margin-right: auto;
 }
 .login .container {
-  width: 510px;
+  width: 450px;
   margin: 0 auto;
   position: relative;
 }
 .login .container h1 {
-  margin-top:50px;
+  margin-top:65px;
   font-size: 35px;
   font-weight: bolder;
 }
@@ -1000,8 +1000,12 @@ img {
   color: red;
   font-size: 15px;
 }
+.login .container .login-form form p{
+  margin-left: auto;
+  margin-right: auto;
+}
 .login .container .login-form {
-  margin-top: 112px;
+  margin-top: 20px;
 }
 .login .container .login-form form {
   display: -ms-grid;
@@ -1012,10 +1016,10 @@ img {
   font-weight: normal;
   background: rgba(57, 57, 57, 0.07);
   margin: 12.5px 0;
-  height: 65px;
+  height: 59px;
   border: none;
-  padding: 0 30px;
-  border-radius: 10px;
+  padding: 0 25px;
+  border-radius: 6px;
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1680px) {
@@ -1115,10 +1119,6 @@ img {
   .login .container .login-form form input {
     height: 45px;
   }
-  .login .container .login-form form button[type=submit] {
-    height: 45px;
-    margin-top: 100px;
-  }
 }
 
 /*end login and create*/
@@ -1160,7 +1160,7 @@ img {
 form button[type=submit]{
   padding: 10px;
   border-radius: 4px;
-  margin: 20px;
+  margin-top: 10px;
 }
 .report_form .container .report-details {
   position: relative;
@@ -1357,11 +1357,106 @@ form button[type=submit]{
 
 .report_form .container p{
   margin-top: 5px;
-  margin-bottom: 50px;
 }
 
 /*end login and create*/
 
 .Test{
   padding: 30px;
+}
+.report_detail{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.mixture{
+  border-radius: 5px;
+  justify-content: space-around;
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+.report_detail input{
+  border: 1px rgb(187, 187, 187) solid;
+  outline: none;
+  border-radius: 5px;
+  width: 45%;
+  color: #000000;
+  height: 45px;
+  margin: 15px 0;
+  padding-left: 15px;
+  background-color: #ffffff;
+}
+
+.report_detail .incident_field{
+  border: 1px rgb(187, 187, 187) solid;
+  outline: none;
+  border-radius: 5px;
+  width: 45%;
+  color: #000000;
+  height: 45px;
+  margin: 15px 0;
+  padding-left: 15px;
+  background-color: #ffffff;
+}
+.report_detail input[type="radio"]{
+  border: 1px rgb(187, 187, 187) solid;
+  outline: none;
+  border-radius: 5px;
+  width: 5%;
+  color: #000000;
+  height: 45px;
+  margin: 15px 0;
+  padding-left: 15px;
+  background-color: #ffffff;
+}
+.mixture input[type="Date"], input[type="time"]{
+  border: 1px rgb(187, 187, 187) solid;
+  outline: none;
+  border-radius: 5px;
+  width: 90%;
+  color: #000000;
+  height: 45px;
+  margin: 15px 0;
+  padding-left: 15px;
+  background-color: #ffffff;
+}
+
+.report_detail button[type=submit]{
+
+}
+.report_detail textarea{
+  width: 70%;
+}
+
+#map{
+  height: 400px;
+  border: 1px solid rgb(169, 169, 169);
+  border-radius: 4px;
+}
+
+.report-detail hr{
+  background-color: black;
+}
+
+.report-detail form button{
+  padding: 10px;
+  width: 100%;
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  height: 45px;
+  color: rgb(0, 0, 0);
+  margin-top: 100px;
+  transition: 0.2s;
+}
+
+.report-detail form button:hover{
+  background-color: #4d4d4d;
+  color: white;
 }

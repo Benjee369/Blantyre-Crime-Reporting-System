@@ -8,9 +8,11 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account</title>
   <link href="css/bootstrap.css" rel="stylesheet" />
-  <link href="css/style.css" rel="stylesheet" />    
-    <title>Document</title>
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -45,14 +47,14 @@ session_start();
             <input type="password" name="userpassword" placeholder="Password" required>
             <button type="submit">Create Account</button>
             <hr class="line-thing2">
-            <p>Already Have an Account? <a class="create_log_btn">Login</a></p>
+            <p>Already Have an Account? <a href="Login.php" class="create_log_btn">Login</a></p>
           </form>
         </div>
       </div>
       </div>
   </div>
 </main>
-    <footer>
+<footer class="info_section">
         <?php
         require_once 'Footer.php';
         ?>

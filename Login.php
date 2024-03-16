@@ -15,7 +15,7 @@ if (!isset($_SESSION['login_failed'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Report Form</title>
+  <title>Login</title>
   <link href="css/bootstrap.css" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
   <link href="css/responsive.css" rel="stylesheet" />
@@ -42,7 +42,8 @@ if (!isset($_SESSION['login_failed'])) {
             ?>
             <input type="email" name="useremail" placeholder="E-mail Address" required>
             <input type="password" name="userpassword" placeholder="Password" required>
-            <button type="submit">LOG-IN</button>
+            <button type="submit">Log In</button>
+            <p>Dont have an Account?  <a href="Create_Account.php" class="create_log_btn">Create Account</a></p>
           </form>
         </div>    
       </div>

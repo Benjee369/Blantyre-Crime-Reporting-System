@@ -55,7 +55,6 @@ session_start();
                     </p>
                     <div class="btn-box">
                       <a href="Report_Form.php" class="btn-1"> Fill in Police Report </a>
-                      <a href="" class="btn-2">Get A Quote</a>
                     </div>
                   </div>
                 </div>
@@ -79,7 +78,6 @@ session_start();
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn-1"> Read more </a>
-                      <a href="" class="btn-2">Get A Quote</a>
                     </div>
                   </div>
                 </div>

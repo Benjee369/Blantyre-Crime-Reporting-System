@@ -34,35 +34,33 @@ session_start();
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                <div class="col-md-6 col-lg-6 col-xl-4">
-                    <div class="dash-widget">
-                        <div class="dash-widget-info text-right">
-                        <?php
-                            require_once 'DatabaseConn.php';
+                    <div class="col-md-6 col-lg-6 col-xl-4">
+                        <div class="dash-widget">
+                            <div class="dash-widget-info text-right">
+                            <?php
+                                require_once 'DatabaseConn.php';
 
-                            // Fetch total number of crimes reported
-                            $query_total_crimes = "SELECT COUNT(*) AS total_crimes FROM crimereports";
-                            $stmt_total_crimes = $conn->prepare($query_total_crimes);
-                            $stmt_total_crimes->execute();
-                            $result_total_crimes = $stmt_total_crimes->get_result();
+                                // Fetch total number of crimes reported
+                                $query_total_crimes = "SELECT COUNT(*) AS total_crimes FROM crimereports";
+                                $stmt_total_crimes = $conn->prepare($query_total_crimes);
+                                $stmt_total_crimes->execute();
+                                $result_total_crimes = $stmt_total_crimes->get_result();
 
-                            if ($result_total_crimes->num_rows > 0) {
-                                $total_crimes = $result_total_crimes->fetch_assoc()['total_crimes'];
-                                echo '<h3>' . $total_crimes . '</h3>';
-                            } else {
-                                echo '<h3>0</h3>'; // Default value if no data available
-                            }
+                                if ($result_total_crimes->num_rows > 0) {
+                                    $total_crimes = $result_total_crimes->fetch_assoc()['total_crimes'];
+                                    echo '<h3>' . $total_crimes . '</h3>';
+                                } else {
+                                    echo '<h3>0</h3>'; // Default value if no data available
+                                }
 
-                            // Close the statement after using the result set
-                            $stmt_total_crimes->close();
-                        ?>
+                                // Close the statement after using the result set
+                                $stmt_total_crimes->close();
+                            ?>
 
-                            <span class="widget-title1">Crimes Reported</span>
+                                <span class="widget-title1">Crimes Reported</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-
                     <div class="col-md-6 col-lg-6 col-xl-4">
                         <div class="dash-widget">
                             <div class="dash-widget-info text-right">

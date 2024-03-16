@@ -9996,12 +9996,7 @@ a.text-dark:hover, a.text-dark:focus {
   img {
     page-break-inside: avoid;
   }
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
+ 
   h2,
   h3 {
     page-break-after: avoid;
@@ -10047,16 +10042,3 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
-.report_detail{
-  border: 1px solid black;
-  margin-top: 0px;
-}
-
-.report_detail p{
-  margin: 0px 0px;
-}
-
-.mixture{
-  border: 1px solid black;
-  display: flex;
-}
