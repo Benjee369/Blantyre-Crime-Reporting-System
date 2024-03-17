@@ -113,7 +113,6 @@ if (isset($_SESSION['admin_id'])) {
 }
 ?>
 
-
                         </div>
                     </div>                    
                 </div>                
@@ -122,10 +121,31 @@ if (isset($_SESSION['admin_id'])) {
 							<div class="card-header bg-white">
 								<h4 class="card-title mb-0">Multimedia Attachments</h4>
 							</div>
-                           
-                            <div class="card-footer text-center bg-white">
-                                <a href="doctors.html" class="text-muted">View all Doctors</a>
-                            </div>
+                                <div class="card-body">
+                                    <?php
+                                    require_once 'DatabaseConn.php';
+
+                                    $report_id = $_GET['report_id'];
+
+                                    // Query to fetch multimedia attachments for the report
+                                    $query = "SELECT * FROM crimereports WHERE ID = ?";
+                                    $stmt = $conn->prepare($query);
+                                    $stmt->bind_param("i", $report_id);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            // Display image
+                                            echo '<img src="' . $row['Multimedia'] . '" alt="Multimedia Attachment" class="img-fluid">';
+                                        }
+                                    } else {
+                                        echo '<p>No multimedia attachments found for this report.</p>';
+                                    }
+
+                                    $stmt->close();
+                                    ?>
+                                </div>
                         </div>
                     </div>
                 </div>

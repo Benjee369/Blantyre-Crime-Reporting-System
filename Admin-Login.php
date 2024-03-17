@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         
         if ($storedHashedPassword !== null && password_verify($password, $storedHashedPassword)) {
+            $_SESSION['admin_email'] = $Email_Address;
             $_SESSION["admin_id"] = $userId;
             $_SESSION["isloggedin"] = true;
             $_SESSION["invalidCredentials"] = false;

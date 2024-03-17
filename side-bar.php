@@ -10,7 +10,7 @@
                     <a href="Appointments.php"><i class="fa fa-user-md"></i> <span>Manage reports</span></a>
                 </li>
                 <li>
-                    <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Manage Users</span></a>
+                    <a href="Manage_Users.php"><i class="fa fa-wheelchair"></i> <span>Manage Users</span></a>
                 </li>
                 <li>
                     <a href="Officers.php"><i class="fa fa-calendar"></i> <span>Officers</span></a>

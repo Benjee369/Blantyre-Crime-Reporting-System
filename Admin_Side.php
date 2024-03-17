@@ -13,7 +13,7 @@ session_start();
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap2.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style2.css">=
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
 </head>
 
 <body>
@@ -27,13 +27,18 @@ session_start();
     <div class="main-wrapper">
         <!-- side bar thing -->
         <?php
-        require_once'side-bar.php';
+        require_once 'side-bar.php';
         ?>
         <!-- end side bar thing -->
 
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
+                    <?php
+                        if (isset($_SESSION['admin_email'])) {
+                            echo "<p>Welcome, " . $_SESSION['admin_email'] . "</p>";
+                        }
+                        ?>
                 <div class="col-md-6 col-lg-6 col-xl-4">
                     <div class="dash-widget">   
                         <div class="dash-widget-info text-right">
@@ -108,14 +113,9 @@ session_start();
                                         <?php
                         require_once 'DatabaseConn.php';
 
-                        $query = "SELECT
-                        crimereports.ID,
-                        crimereports.First_Name,
-                        crimereports.Last_Name,
-                        crimereports.Incident_Category,
-                        crimereports.CurrentDate,
-                        crimereports.Location
-                    FROM crimereports";
+                        $query = "SELECT *
+                    FROM crimereports
+                    ORDER BY CurrentDate desc";
                     
 
                     $stmt = $conn->prepare($query);
@@ -128,8 +128,8 @@ session_start();
                         foreach ($incident_reports as $incident_report) {
                             echo '<tr>';
                             echo '<td style="min-width: 200px;">';
-                            echo '<a class="avatar" href="profile.html">' . strtoupper(substr($incident_report['First_Name'], 0, 1)) . '</a>';
-                            echo '<h2><a href="profile.html">' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '<span>' . $incident_report['Location'] . '</span></a></h2>';
+                            echo '<a class="avatar" href="Manage_Users.php">' . strtoupper(substr($incident_report['First_Name'], 0, 1)) . '</a>';
+                            echo '<h2><a href="Manage_Users.php">' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '<span>' . $incident_report['Location'] . '</span></a></h2>';
                             echo '</td>';
 
                             echo '<td>';
