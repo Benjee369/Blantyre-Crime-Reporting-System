@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="parent clearfix">   
     <div class="login">
       <div class="container">
-        <h1>Login to access to<br />your account</h1>
+        <h1>Login as Admin or<br/>Police Officer</h1>
     
         <div class="login-form">
           <form action="" method="POST">
@@ -139,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               }           
             ?>
             <label for="role">Select Role:</label>
-            <select name="role">
+            <select class="admin_role" name="role">
                 <option value="admin">Admin</option>
                 <option value="officer">Officer</option>
             </select>

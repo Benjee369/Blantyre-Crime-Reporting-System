@@ -1481,3 +1481,13 @@ form button[type=submit]{
 .line-thing{
   margin: 0px;
 }
+
+.admin_role{
+  border: 1px rgb(187, 187, 187) solid;
+  outline: none;
+  border-radius: 5px;
+  color: #000000;
+  height: 45px;
+  padding-left: 15px;
+  background-color: #ffffff;
+}

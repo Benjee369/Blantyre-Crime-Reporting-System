@@ -34,11 +34,6 @@ session_start();
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                    <?php
-                        if (isset($_SESSION['admin_email'])) {
-                            echo "<p>Welcome, " . $_SESSION['admin_email'] . "</p>";
-                        }
-                        ?>
                 <div class="col-md-6 col-lg-6 col-xl-4">
                     <div class="dash-widget">   
                         <div class="dash-widget-info text-right">
