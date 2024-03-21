@@ -74,7 +74,7 @@
                         foreach ($incident_reports as $incident_report) {
                             echo '<tr>';
                             echo '<td>';
-                            echo '<h2><a href="profile.html">' . $incident_report['ID'] . '</a></h2>';
+                            echo '<h2><a href="Manage_Users.php">' . $incident_report['ID'] . '</a></h2>';
                             echo '</td>';
 
                             echo '<td>';

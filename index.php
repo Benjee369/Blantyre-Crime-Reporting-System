@@ -15,7 +15,7 @@ session_start();
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Guarder</title>
+  <title>Blantyre Police Department</title>
   <link href="css/bootstrap.css" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
   <link href="css/responsive.css" rel="stylesheet" />
@@ -50,8 +50,9 @@ session_start();
                       </span>
                     </h1>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod magna aliqua. Ut enim ad minim veniam
+                    We are pleased to introduce our Online Reporting System, designed to provide you with a 
+                    convenient and efficient way to report incidents to the Blantyre Police Department. Whether 
+                    you've witnessed a crime, experienced an incident, or have information to share, our platform is here to assist you.
                     </p>
                     <div class="btn-box">
                       <a href="Report_Form.php" class="btn-1"> Fill in Police Report </a>
@@ -89,7 +90,6 @@ session_start();
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
           </ol>
         </div>
       </div>

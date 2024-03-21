@@ -4,7 +4,7 @@
           <div class="info_logo">
             <a class="navbar-brand" href="index.html">
               <span>
-                Guarder
+                Blantyre Police <br> Department
               </span>
             </a>
             <p>
