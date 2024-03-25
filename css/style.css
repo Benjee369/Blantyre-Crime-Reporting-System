@@ -1491,3 +1491,29 @@ form button[type=submit]{
   padding-left: 15px;
   background-color: #ffffff;
 }
+
+.sort_reports a{
+  color: rgb(255, 255, 255);
+  padding: 7px 30px;
+  border: solid rgb(219, 219, 219) 1px;
+  border-radius: 3px;
+  background-color: #282828;
+}
+.sort_reports a:hover{
+  color: rgb(255, 247, 135);
+  background-color: #242424;
+  border: #dcdcdc 1px solid;
+}
+
+.sort_reports{
+  width: 100%;
+  margin: 4px 0 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.graph-wrapper{
+  width: 80%;
+  margin-top: 90px;
+  margin-left: 230px;
+}

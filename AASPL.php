@@ -8,11 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $report_id = $_POST['report_id'];
     $officer_id = $_POST['officer_id'];
     $priority_level = $_POST['priority_level'];
+    $assigned_date = date("Y-m-d H:i:s");
 
     // Prepare and execute the SQL query to insert into the assignments table
-    $query = "INSERT INTO assignments (ReportID, OfficerID, PriorityLevel) VALUES (?, ?, ?)";
+    $query = "INSERT INTO assignments (ReportID, OfficerID, PriorityLevel, Status, AssignedDate) VALUES (?, ?, ?, 'In Progress', ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("iis", $report_id, $officer_id, $priority_level);
+    $stmt->bind_param("iiss", $report_id, $officer_id, $priority_level, $assigned_date);
     $stmt->execute();
 
     // Check if the insertion was successful

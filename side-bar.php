@@ -22,7 +22,7 @@
                     <a href="Manage_Officers.php"><i class="fa fa-calendar"></i> <span>Officers</span></a>
                 </li>
                 <li>
-                    <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Statistics</span></a>
+                    <a href="Statistics.php"><i class="fa fa-calendar"></i> <span>Statistics</span></a>
                 </li>
             </ul>
         </div>

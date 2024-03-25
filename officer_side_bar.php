@@ -4,7 +4,7 @@
             <ul>
                 <li class="menu-title">Main</li>
                 <li class="active">
-                    <a href="Admin_Side.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                    <a href="Officer_Side.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                 </li>
 				<li>
                     <a href="Manage_Reports.php"><i class="fa fa-user-md"></i> <span>Assigned Reports</span></a>

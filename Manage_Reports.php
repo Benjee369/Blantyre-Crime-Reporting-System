@@ -25,7 +25,7 @@ session_start();
     <div class="main-wrapper">
         <!-- side bar thing -->
         <?php
-        require_once'side-bar.php';
+        require_once'officer_side_bar.php';
         ?>
         <!-- end side bar thing -->
         <div class="page-wrapper">

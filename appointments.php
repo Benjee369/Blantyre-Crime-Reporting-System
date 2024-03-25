@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-<!-- appointments23:19-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -30,9 +27,16 @@
             <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-3">
-                        <h4 class="page-title">Manage all the Police Reports</h4>
+                        <h4 class="page-title">Manage all the Reports</h4>
                     </div>
-                  </div>
+                </div>
+                <div class="sort_reports">
+                    <a href="appointments.php?filter=all">All Reports</a>
+                    <a href="appointments.php?filter=unassigned">Unassigned Reports</a>
+                    <a href="appointments.php?filter=assigned">Assigned Reports</a>
+                    <a href="appointments.php?filter=closed">Closed Reports</a>
+                    <a href="appointments.php?filter=inprogress">In Progress Reports</a>
+                </div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="table-responsive">
@@ -50,66 +54,74 @@
 										<th class="text-right">Action</th>
 									</tr>
 								</thead>
-								<tbody>
-									
-                                    <?php
-                        require_once 'DatabaseConn.php';
+								<tbody>									
+                                <?php
+                                    require_once 'DatabaseConn.php';
 
-                        $query = ("SELECT
-                        crimereports.ID,
-                        crimereports.First_Name,
-                        crimereports.Last_Name,
-                        crimereports.Incident_Category,
-                        crimereports.CurrentDate,
-                        crimereports.WitnessedDate,
-                        crimereports.People_Involved
-                    FROM crimereports");                    
+                                    $filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
 
-                    $stmt = $conn->prepare($query);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                                    switch ($filter) {
+                                        case 'unassigned':
+                                            $query = "SELECT * FROM crimereports WHERE ID NOT IN (SELECT ReportID FROM assignments)";
+                                            break;
+                                        case 'assigned':
+                                            $query = "SELECT * FROM crimereports WHERE ID IN (SELECT ReportID FROM assignments)";
+                                            break;
+                                        case 'closed':
+                                            $query = "SELECT * FROM crimereports WHERE ID IN (SELECT ReportID FROM assignments WHERE Status = 'Closed')";
+                                            break;
+                                        case 'inprogress':
+                                            $query = "SELECT * FROM crimereports WHERE ID IN (SELECT ReportID FROM assignments WHERE Status = 'In Progress')";
+                                            break;
+                                        default:
+                                            $query = "SELECT * FROM crimereports";
+                                    }
 
-                    if ($result->num_rows > 0) {
-                        $incident_reports = $result->fetch_all(MYSQLI_ASSOC);
-                        foreach ($incident_reports as $incident_report) {
-                            echo '<tr>';
-                            echo '<td>';
-                            echo '<h2><a href="Manage_Users.php">' . $incident_report['ID'] . '</a></h2>';
-                            echo '</td>';
+                                    $stmt = $conn->prepare($query);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
 
-                            echo '<td>';
-                            echo '<h2><a href="profile.html">' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '</a></h2>';
-                            echo '</td>';
+                                    if ($result->num_rows > 0) {
+                                        $incident_reports = $result->fetch_all(MYSQLI_ASSOC);
+                                        foreach ($incident_reports as $incident_report) {
+                                            echo '<tr>';
+                                            echo '<td>';
+                                            echo '<h2><a href="Manage_Users.php">' . $incident_report['ID'] . '</a></h2>';
+                                            echo '</td>';
 
-                            echo '<td>';
-                            echo '<p>' . $incident_report['People_Involved'] . '</p>';
-                            echo '</td>';
+                                            echo '<td>';
+                                            echo '<h2><a href="profile.html">' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '</a></h2>';
+                                            echo '</td>';
 
-                            echo '<td>';
-                            echo '<p>' . $incident_report['CurrentDate'] . '</p>';
-                            echo '</td>';
+                                            echo '<td>';
+                                            echo '<p>' . $incident_report['People_Involved'] . '</p>';
+                                            echo '</td>';
 
-                            echo '<td>';
-                            echo '<p>' . $incident_report['Incident_Category'] . '</p>';
-                            echo '</td>';
+                                            echo '<td>';
+                                            echo '<p>' . $incident_report['CurrentDate'] . '</p>';
+                                            echo '</td>';
 
-                            echo '<td>';
-                            echo '<p>' . $incident_report['CurrentDate'] . '</p>';
-                            echo '</td>';
+                                            echo '<td>';
+                                            echo '<p>' . $incident_report['Incident_Category'] . '</p>';
+                                            echo '</td>';
 
-                            echo '<td>';
-                            echo '<p>' . $incident_report['WitnessedDate'] . '</p>';
-                            echo '</td>';
+                                            echo '<td>';
+                                            echo '<p>' . $incident_report['CurrentDate'] . '</p>';
+                                            echo '</td>';
 
-                            echo '</tr>';
-                        }
-                    } else {
-                        echo '<p class="no_review">No Reviews available at the moment,<br>
-                        Be the first To leave a Review.</p>';
-                    }
-                    $stmt->close();
-                    $conn->close();            
-                    ?>
+                                            echo '<td>';
+                                            echo '<p>' . $incident_report['WitnessedDate'] . '</p>';
+                                            echo '</td>';
+
+                                            echo '</tr>';
+                                        }
+                                    } else {
+                                        echo '<p class="no_review">No Reviews available at the moment,<br>
+                                        Be the first To leave a Review.</p>';
+                                    }
+                                    $stmt->close();
+                                    $conn->close();
+                                ?>
 								</tbody>
 							</table>
 						</div>
@@ -126,19 +138,6 @@
                     </div>
                 </div>
             </div> -->
-			<!-- <div id="delete_appointment" class="modal fade delete-modal" role="dialog">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-body text-center">
-							<img src="assets/img/sent.png" alt="" width="50" height="46">
-							<h3>Are you sure want to delete this Appointment?</h3>
-							<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-								<button type="submit" class="btn btn-danger">Delete</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
 		</div>
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
@@ -148,18 +147,5 @@
     <script src="assets/js/jquery.slimscroll.js"></script>
     <script src="assets/js/select2.min.js"></script>
     <script src="assets/js/app.js"></script>
-	<script>
-            $(function () {
-                $('#datetimepicker3').datetimepicker({
-                    format: 'LT'
-                });
-				$('#datetimepicker4').datetimepicker({
-                    format: 'LT'
-                });
-            });
-     </script>
 </body>
-
-
-<!-- appointments23:20-->
 </html>
