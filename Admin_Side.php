@@ -67,13 +67,13 @@ session_start();
                                 require_once 'DatabaseConn.php';
 
                                 // Fetch total number of crimes reported
-                                $query_total_crimes = "SELECT COUNT(*) AS total_officers FROM admindetails WHERE Role='officer'";
+                                $query_total_crimes = "SELECT COUNT(*) AS assigned_reports FROM assignments";
                                 $stmt_total_officers = $conn->prepare($query_total_crimes);
                                 $stmt_total_officers->execute();
                                 $result_total_officers = $stmt_total_officers->get_result();
 
                                 if ($result_total_officers->num_rows > 0) {
-                                    $total_officers = $result_total_officers->fetch_assoc()['total_officers'];
+                                    $total_officers = $result_total_officers->fetch_assoc()['assigned_reports'];
                                     echo '<h3>' . $total_officers . '</h3>';
                                 } else {
                                     echo '<h3>0</h3>';
@@ -81,15 +81,31 @@ session_start();
                                 $stmt_total_officers->close();
                             ?>
 
-                                <span class="widget-title2">Officers Available</span>
+                                <span class="widget-title2">Reports Assigned</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-4">
                         <div class="dash-widget">
                             <div class="dash-widget-info text-right">
-                                <h3>72</h3>
-                                <span class="widget-title3">Attend <i class="fa fa-check" aria-hidden="true"></i></span>
+                                <?php
+                                    require_once 'DatabaseConn.php';
+
+                                    // Fetch total number of crimes reported
+                                    $query_total_crimes = "SELECT COUNT(*) AS total_officers FROM admindetails WHERE Role='officer'";
+                                    $stmt_total_officers = $conn->prepare($query_total_crimes);
+                                    $stmt_total_officers->execute();
+                                    $result_total_officers = $stmt_total_officers->get_result();
+
+                                    if ($result_total_officers->num_rows > 0) {
+                                        $total_officers = $result_total_officers->fetch_assoc()['total_officers'];
+                                        echo '<h3>' . $total_officers . '</h3>';
+                                    } else {
+                                        echo '<h3>0</h3>';
+                                    }
+                                    $stmt_total_officers->close();
+                                ?>
+                                <span class="widget-title3">Available Officers<i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
                         </div>
                     </div>

@@ -35,88 +35,122 @@ session_start();
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-8 col-xl-8">
-                    <div class="card">
-						<div class="card-header">
-							<h4 class="card-title d-inline-block">Report Details</h4>
-                            <a href="appointments.php" class="btn btn-primary float-right">View all</a>
-						</div>
-                        <div class="card-body -0">
-                            <?php
-                                require_once 'DatabaseConn.php';
-                                
-                                $report_id = isset($_GET['report_id']) ? $_GET['report_id'] : null;
-
-                                $query = "SELECT * FROM crimereports WHERE ID = ?";
-                                $stmt = $conn->prepare($query);
-                                $stmt->bind_param("i", $report_id);
-                                $stmt->execute();
-                                $result = $stmt->get_result();
-
-                                if ($result->num_rows > 0) {
-                                    $report_details = $result->fetch_assoc();
-
-                                    echo '<h2>' . $report_details['First_Name'] . ' ' . $report_details['Last_Name'] . '</h2>';
-                                    echo '<p>Incident Category: ' . $report_details['Incident_Category'] . '</p>';
-                                    echo '<p>Date: ' . $report_details['CurrentDate'] . '</p>';
-                                    echo '<p>Description: ' . $report_details['Description'] . '</p>';
-                                    
-                                } else {
-                                    echo '<p>Report not found</p>';
-                                }
-
-                                $stmt->close();
-                            ?> 
-                <br>
-                <br>
-                <?php
-                    if (isset($_SESSION['admin_id'])) {
-                ?>
-
-                <form action="AASPL.php" method="post">
-                    <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
-
-                    <label for="officer_id">Assign to Officer:</label>
-                    <select name="officer_id" required>
-                        <option value="">Select Officer</option>
-                        <?php
-                        // Fetch officers from the database
-                        require_once 'DatabaseConn.php';
-                        $query = "SELECT ID, Email FROM admindetails WHERE Role = 'officer'";
-                        $stmt = $conn->prepare($query);
-                        $stmt->execute();
-                        $officers = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-                        $stmt->close();
-
-                        foreach ($officers as $officer) {
-                            echo '<option value="' . $officer['ID'] . '">' . $officer['Email'] . '</option>';
-                        }
-                        ?>
-                    </select>
-
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                    <label for="priority_level">Priority Level:</label>
-                    <select name="priority_level" required>
-                        <option value="">Select Priority Level</option>
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
-                    </select>
-                    <input class="btn btn-primary float-right" type="submit" value="Assign and Set Priority">
-                </form>
-
-                    <?php
-                        } else {
-
-                        }
-                    ?>
+                    <div class="report_form1">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title d-inline-block">Report Details</h4>
+                                <a href="appointments.php" class="btn btn-primary float-right">View all</a>
                             </div>
-                        </div>  
+                            <div class="card-body -0">
+                                <?php
+                                    require_once 'DatabaseConn.php';
+                                    
+                                    $report_id = isset($_GET['report_id']) ? $_GET['report_id'] : null;
 
+                                    $query = "SELECT c.*, u.Address, u.Email_Address FROM crimereports c, userdetails u WHERE u.ID = c.UserID AND c.ID = ?";
+                                    $stmt = $conn->prepare($query);
+                                    $stmt->bind_param("i", $report_id);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+
+                                    if ($result->num_rows > 0) {
+                                        $report_details = $result->fetch_assoc();
+                                        echo '<div class="report_info">';
+                                        echo '<h2> User Details'.'</h2>';
+                                        echo '</div>';
+
+                                        echo '<div class="report_info_mix">';
+                                        echo '<div class="report_info2">';
+                                        echo '<p>Full Name: ' . $report_details['First_Name'] . ' ' . $report_details['Last_Name'] . '</p>';
+                                        echo '</div>';
+
+                                        echo '<div class="report_info2">';
+                                        echo '<p>Email: ' . $report_details['Email_Address'] . '</p>';
+                                        echo '</div>';
+                                        echo '</div>';
+
+                                        echo '<div class="report_info">';
+                                        echo '<p>Address: '. $report_details['Address'] .'</p>';
+                                        echo '</div>';
+
+                                        echo '<div>';
+                                        echo '<h2 class="report_info"> Incident Details'.'</h2>';
+                                        echo '</div>';
+                                        echo '<div class="report_info">';
+                                        echo '<p>Incident Category: ' . $report_details['Incident_Category'] . '</p>';
+                                        echo '</div>';
+                                        echo '<div class="report_info">';
+                                        echo '<p>Date: ' . $report_details['CurrentDate'] . '</p>';
+                                        echo '</div>';
+                                        echo '<div class="report_info">';
+                                        echo '<p>Description: ' . $report_details['Description'] . '</p>';
+                                        echo '</div>';
+                                        
+                                    } else {
+                                        echo '<p>Report not found</p>';
+                                    }
+
+                                    $stmt->close();
+                                ?> 
+                                    <br>
+                                    <br>
                                 <?php
                                     if (isset($_SESSION['officer_id'])) {
                                 ?>
+                                <div class="initialise_chat">
+                                    <a href="Chat_Interface.php" class="btn btn-primary float-right" >Initialise Chat</a>
+                                </div>
+                                <?php
+                                } else {
+                                }
+                                ?>
+                            </div>
+                        </div>  
+                    <?php
+                        if (isset($_SESSION['admin_id'])) {
+                    ?>
+
+                    <form action="AASPL.php" method="post">
+                        <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
+
+                        <label for="officer_id">Assign to Officer:</label>
+                        <select name="officer_id" required>
+                            <option value="">Select Officer</option>
+                            <?php
+                            // Fetch officers from the database
+                            require_once 'DatabaseConn.php';
+                            $query = "SELECT ID, Email FROM admindetails WHERE Role = 'officer'";
+                            $stmt = $conn->prepare($query);
+                            $stmt->execute();
+                            $officers = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                            $stmt->close();
+
+                            foreach ($officers as $officer) {
+                                echo '<option value="' . $officer['ID'] . '">' . $officer['Email'] . '</option>';
+                            }
+                            ?>
+                        </select>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <label for="priority_level">Priority Level:</label>
+                        <select name="priority_level" required>
+                            <option value="">Select Priority Level</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <input class="btn btn-primary float-right" type="submit" value="Assign and Set Priority">
+                    </form>
+
+                        <?php
+                            } else {
+
+                            }
+                        ?>
+                        <?php
+                            if (isset($_SESSION['officer_id'])) {
+                        ?>
                                 <div class="update_status">
                                     <form method="post">
                                         <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
@@ -130,73 +164,64 @@ session_start();
                                         <input class="btn btn-primary float-right" type="submit" value="Update Status">
                                     </form>
                                 </div>
-                        <?php
-                            // Check if the form has been submitted
-                            // Check if the form has been submitted
-                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                // Include the database connection file
-                                require_once 'DatabaseConn.php';
+                            <?php
+                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                                // Retrieve values from the form
-                                $report_id = isset($_POST['report_id']) ? $_POST['report_id'] : null;
-                                $status = isset($_POST['status']) ? $_POST['status'] : null;
+                                    require_once 'DatabaseConn.php';
 
-                                if ($report_id !== null && $status !== null) {
-                                    // Prepare and execute the SQL query to update the status of the report
-                                    $query = "UPDATE assignments SET Status = ? WHERE ReportID = ?";
-                                    $stmt = $conn->prepare($query);
-                                    $stmt->bind_param("si", $status, $report_id);
-                                    $stmt->execute();
+                                    $report_id = isset($_POST['report_id']) ? $_POST['report_id'] : null;
+                                    $status = isset($_POST['status']) ? $_POST['status'] : null;
 
-                                    // Check if the update was successful
-                                    if ($stmt->affected_rows > 0) {
-                                        echo "Status successfully updated.";
+                                    if ($report_id !== null && $status !== null) {
+
+                                        $query = "UPDATE assignments SET Status = ? WHERE ReportID = ?";
+                                        $stmt = $conn->prepare($query);
+                                        $stmt->bind_param("si", $status, $report_id);
+                                        $stmt->execute();
+
+                                        if ($stmt->affected_rows > 0) {
+                                            echo "Status successfully updated.";
+                                        } else {
+                                            echo "Error updating status: " . $stmt->error;
+                                        }
+
+                                        $stmt->close();
                                     } else {
-                                        echo "Error updating status: " . $stmt->error;
+                                        echo "Error: Report ID or status not provided.";
                                     }
-
-                                    // Close the statement
-                                    $stmt->close();
-                                } else {
-                                    // Handle the case where the report_id or status is not provided
-                                    echo "Error: Report ID or status not provided.";
                                 }
-
-                                // Close the database connection
-                            }
-                            }
-                        ?>
-                </div>                
-                <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                                }
+                            ?>
+                        </div>         
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-4">
                         <div class="card member-panel">
 							<div class="card-header bg-white">
 								<h4 class="card-title mb-0">Multimedia Attachments</h4>
 							</div>
-                                <div class="card-body">
-                                    <?php
-                                    require_once 'DatabaseConn.php';
+                            <div class="card-body">
+                                <?php
+                                require_once 'DatabaseConn.php';
 
-                                    $report_id = isset($_GET['report_id']) ? $_GET['report_id'] : null;
+                                $report_id = isset($_GET['report_id']) ? $_GET['report_id'] : null;
 
-                                    $query = "SELECT * FROM crimereports WHERE ID = ?";
-                                    $stmt = $conn->prepare($query);
-                                    $stmt->bind_param("i", $report_id);
-                                    $stmt->execute();
-                                    $result = $stmt->get_result();
+                                $query = "SELECT * FROM crimereports WHERE ID = ?";
+                                $stmt = $conn->prepare($query);
+                                $stmt->bind_param("i", $report_id);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
 
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo '<img src="' . $row['Multimedia'] . '" alt="Multimedia Attachment" class="img-fluid">';
-                                        }
-                                    } else {
-                                        echo '<p>No multimedia attachments found for this report.</p>';
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo '<img src="' . $row['Multimedia'] . '" alt="Multimedia Attachment" class="img-fluid">';
                                     }
+                                } else {
+                                    echo '<p>No multimedia attachments found for this report.</p>';
+                                }
 
-                                    $stmt->close();
-                                    $conn->close();
-
-                                    ?>
-                                </div>
+                                $stmt->close();
+                                $conn->close();
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>

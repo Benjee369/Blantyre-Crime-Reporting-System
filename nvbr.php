@@ -53,6 +53,9 @@
                             <a class="nav-link" href="contact.php">Contact us</a>
                           </li>
                           <li class="nav-item">
+                            <a class="nav-link" href="Report_History.php">Report History</a>
+                          </li>
+                          <li class="nav-item">
                             <a class="nav-link" href="Logout.php">Logout</a>
                           </li>';
                 } elseif (isset($_SESSION['admin_id']) || isset($_SESSION['officer_id'])) {
@@ -83,9 +86,9 @@
                 }
                 ?>
              
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" href="Admin_Side.php">Admin Side</a>
-                </li>                
+                </li>                 -->
               </ul>
             </div>
           </nav>

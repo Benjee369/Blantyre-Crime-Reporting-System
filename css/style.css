@@ -1517,3 +1517,31 @@ form button[type=submit]{
   margin-top: 90px;
   margin-left: 230px;
 }
+
+.report_form1{
+  border: 1px solid black;
+  border-radius: 0px;
+  width: 65%;
+}
+
+.report_info{
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.report_info2{
+  border: 1px solid black;
+  margin-right: 20px;
+  padding: 5px;
+}
+
+.report_info_mix{
+  display: flex;
+  
+}
+
+.history{
+  margin-top: 69px;
+  padding: 10px;
+  width: 99%;
+}
