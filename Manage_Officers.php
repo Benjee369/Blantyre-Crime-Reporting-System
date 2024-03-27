@@ -34,11 +34,6 @@ session_start();
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                    <?php
-                        if (isset($_SESSION['admin_email'])) {
-                            echo "<p>Welcome, " . $_SESSION['admin_email'] . "</p>";
-                        }
-                        ?>
                 </div>
 				
 				<div class="row">
@@ -47,12 +42,16 @@ session_start();
 							<div class="card-header">
 								<h4 class="card-title d-inline-block">View and Manage Users</h4>
 							</div>
+                            <div class="add_officer">
+                                <a href="Create_Admin.php" >Add a new Officer or Admin</a>
+                            </div>
 							<div class="user_details">
                             <?php
                         require_once 'DatabaseConn.php';
 
                         $query = "SELECT *
-                    FROM userdetails";
+                    FROM admindetails
+                    WHERE Role = 'officer'";
                     
 
                     $stmt = $conn->prepare($query);
@@ -64,13 +63,7 @@ session_start();
                         $user_details = $result->fetch_all(MYSQLI_ASSOC);
                         foreach ($user_details as $user_detail) {
                             echo '<div class="u_details">';
-                            echo '<h1>'.$user_detail['First_Name'] . ' ' . $user_detail['Last_Name'] .'</h1>';
-                            echo '<hr class="line-thing">';
-                            echo '<p>'."<b>Email: </b>".''.$user_detail['Email_Address'].'</p>';
-                            echo '<hr class="line-thing">';
-                            echo '<p>'."<b>Phone Number: </b>".''.$user_detail['Phone_Number'].'</p>';
-                            echo '<hr class="line-thing">';
-                            echo '<p>'."<b>Location: </b>".''.$user_detail['Address'].'</p>';
+                            echo '<p><b>Officer ID:</b> '.$user_detail['ID'] . ' '.'<br>'.'<b>Email: </b>' . $user_detail['Email'] .'</p>';
                             echo '<a class="btn btn-outline-primary take-btn">Block User</a>';
                             echo '</div>';
                         }

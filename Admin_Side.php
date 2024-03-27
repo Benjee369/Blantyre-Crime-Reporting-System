@@ -124,9 +124,10 @@ session_start();
                                         <?php
                         require_once 'DatabaseConn.php';
 
-                        $query = "SELECT *
-                    FROM crimereports
-                    ORDER BY CurrentDate desc";
+                        $query = "SELECT * 
+                        FROM crimereports 
+                        WHERE ID 
+                        NOT IN (SELECT ReportID FROM assignments)";
                     
 
                     $stmt = $conn->prepare($query);

@@ -145,8 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
             <input type="email" name="email" placeholder="E-mail Address" required>
             <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">LOG-IN</button>
-            <p>Dont Have an Account? <a href="createadmin.php" >Create Account</a></p>
+            <button type="submit">Log In</button>
           </form>
         </div>    
       </div>

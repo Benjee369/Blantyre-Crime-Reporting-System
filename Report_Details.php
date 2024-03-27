@@ -1,7 +1,5 @@
 <?php
 ini_set('error_reporting', E_ALL);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 ?>
@@ -27,10 +25,13 @@ session_start();
     </header>
         <!-- nav2 end -->
     <div class="main-wrapper">
-        <!-- side bar thing -->
-        <?php
-        require_once'side-bar.php';
-        ?>
+    <?php
+        if (isset($_SESSION['officer_id'])) {
+            require_once 'officer_side_bar.php';
+        } else {
+            require_once 'side-bar.php';
+        }
+    ?>
         <!-- end side bar thing -->
         <div class="page-wrapper">
             <div class="content">
@@ -94,16 +95,19 @@ session_start();
                                 ?> 
                                     <br>
                                     <br>
-                                <?php
+                                    <?php
+                                    // Assuming $report_id is available in your code (e.g., from the report details page)
+
                                     if (isset($_SESSION['officer_id'])) {
-                                ?>
-                                <div class="initialise_chat">
-                                    <a href="Chat_Interface.php" class="btn btn-primary float-right" >Initialise Chat</a>
-                                </div>
-                                <?php
-                                } else {
-                                }
-                                ?>
+                                    ?>
+                                    <div class="initialise_chat">
+                                        <a type="button" class="btn btn-primary" href="Chat_Interface.php?report_id=<?php echo $report_id; ?>">Initialize Chat</a>
+                                    </div>
+                                    <?php
+                                    } else {
+                                        // ... button or message for users who can't initiate chats
+                                    }
+                                    ?>
                             </div>
                         </div>  
                     <?php

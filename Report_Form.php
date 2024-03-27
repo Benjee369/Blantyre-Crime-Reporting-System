@@ -4,13 +4,10 @@ ini_set('display_errors', 1);
 session_start();
 $UserID = $_SESSION["user_id"];
 
-// Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        // Include the database connection file
         require_once 'DatabaseConn.php';
 
-        // Extract report details from the form
         $FirstName = $_POST["firstname"] ?? null;
         $LastName = $_POST["lastname"] ?? null;
         $IncidentCategory = $_POST["incidentCategory"] ?? null;
@@ -21,7 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $IfAffected = isset($_POST["ifAffected"]) ? 1 : 0;
         $Location = $_POST["coordinates"] ?? null;
 
-        // Handle multimedia attachment
         $Multimedia = "";
         if (isset($_FILES["file"])) {
             $fileTmpPath = $_FILES["file"]["tmp_name"];
@@ -37,8 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             $Multimedia = $uploadPath;
         }
-
-        // Insert report details into the database
+        
         $insertReportStmt = $conn->prepare("INSERT INTO crimereports (UserID, First_Name, Last_Name, Incident_Category, CurrentDate, WitnessedDate, Description, People_Involved, If_Affected, Multimedia, Location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $insertReportStmt->bind_param("issssssiiss", $UserID, $FirstName, $LastName, $IncidentCategory, $CurrentDate, $WitnessedDate, $Description, $PeopleInvolved, $IfAffected, $Multimedia, $Location);
 
@@ -100,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <p class="report_form_label">Select Incident Category</p>
             <select name="incidentCategory" class="incident_field">
                 <option value="Traffic Accident">Traffic Accident</option>
+                <option value="Missing Identity Card">Missing Identity Card</option>
                 <option value="Theft">Theft</option>
                 <option value="Assault">Assault</option>
                 <option value="Vandalism">Vandalism</option>
