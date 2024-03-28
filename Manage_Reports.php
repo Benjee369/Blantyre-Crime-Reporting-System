@@ -88,7 +88,7 @@ session_start();
                                     echo '</td>';
         
                                     echo '<td>';
-                                    echo '<p>' . $incident_report['CurrentDate'] . '</p>';
+                                    echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
                                     echo '</td>';
         
                                     echo '<td>';
@@ -96,7 +96,7 @@ session_start();
                                     echo '</td>';
         
                                     echo '<td>';
-                                    echo '<p>' . $incident_report['CurrentDate'] . '</p>';
+                                    echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
                                     echo '</td>';
         
                                     echo '<td>';

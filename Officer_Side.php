@@ -117,7 +117,7 @@ session_start();
                         FROM crimereports
                         INNER JOIN assignments ON crimereports.ID = assignments.ReportID
                         WHERE assignments.OfficerID = ?
-                        ");        
+                        ORDER BY ID desc");        
 
                     $stmt = $conn->prepare($query);
                     $stmt->bind_param("i", $officer_id);
@@ -140,7 +140,7 @@ session_start();
 
                             echo '<td>';
                             echo '<h5 class="time-title p-0">Current Date</h5>';
-                            echo '<p>' . $incident_report['CurrentDate'] . '</p>';
+                            echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
                             echo '</td>';
 
                             echo '<td class="text-right">';

@@ -151,7 +151,7 @@ session_start();
 
                             echo '<td>';
                             echo '<h5 class="time-title p-0">Current Date</h5>';
-                            echo '<p>' . $incident_report['CurrentDate'] . '</p>';
+                            echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
                             echo '</td>';
 
                             echo '<td class="text-right">';

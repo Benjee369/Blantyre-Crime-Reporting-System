@@ -42,8 +42,9 @@ session_start();
 
                         $query = "SELECT c.*, u.*
                     FROM crimereports c, userdetails u
-                    WHERE u.ID = ?
-                    ORDER BY c.CurrentDate desc";
+                    WHERE u.ID = c.UserID 
+                    AND u.ID = ?
+                    ORDER BY c.SubmittedDate desc";
                     
 
                     $stmt = $conn->prepare($query);
@@ -66,8 +67,8 @@ session_start();
                             echo '</td>';
 
                             echo '<td>';
-                            echo '<h5 class="time-title p-0">Current Date</h5>';
-                            echo '<p>' . $incident_report['CurrentDate'] . '</p>';
+                            echo '<h5 class="time-title p-0">Submitted Date</h5>';
+                            echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
                             echo '</td>';
 
                             echo '<td class="text-right">';

@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $Multimedia = $uploadPath;
         }
         
-        $insertReportStmt = $conn->prepare("INSERT INTO crimereports (UserID, First_Name, Last_Name, Incident_Category, CurrentDate, WitnessedDate, Description, People_Involved, If_Affected, Multimedia, Location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $insertReportStmt = $conn->prepare("INSERT INTO crimereports (UserID, First_Name, Last_Name, Incident_Category, SubmittedDate, WitnessedDate, Description, People_Involved, If_Affected, Multimedia, Location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $insertReportStmt->bind_param("issssssiiss", $UserID, $FirstName, $LastName, $IncidentCategory, $CurrentDate, $WitnessedDate, $Description, $PeopleInvolved, $IfAffected, $Multimedia, $Location);
 
         if ($insertReportStmt->execute()) {

@@ -1569,6 +1569,7 @@ form button[type=submit]{
   border-radius: 3px;
   margin: 5px;
   padding: 4px;
+  width: 25%;
 }
 
 .chat-message-sender{
@@ -1584,10 +1585,27 @@ form button[type=submit]{
   margin-top: 74px;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid black;
+  border-radius: 4px 4px 0px 0px ;
 }
 
-.chat-message-timestamp{
-  
+.user-message {
+  border: 1px solid rgb(196, 196, 196);
+  background-color: #d8d8d8; /* Light gray background for user messages */
+  text-align: left; /* Align user messages to the left */
+  margin-left: 10px; /* Add some left margin for user messages */
+}
+.officer-message {
+  border: 1px solid rgb(196, 196, 196);
+  margin-left: auto;
+  color: white;
+  background-color: #3f3f3f; /* Light blue background for officer messages */
+  text-align: right; /* Align officer messages to the right */
+  margin-right: 10px; /* Add some right margin for officer messages */
+}
+
+.chat-text{
+  padding: 20px;
 }
 
 #chat-button{
@@ -1596,4 +1614,12 @@ form button[type=submit]{
   padding: 5px;
   margin-bottom: 10px;
   border: 1px solid black;
+}
+
+.form-chat{
+  border-top: 1px solid black;
+  padding: 10px;
+  height: 10%;
+  display: flex;
+  justify-content: space-evenly;
 }

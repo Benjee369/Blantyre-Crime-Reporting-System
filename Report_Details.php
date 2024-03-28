@@ -81,7 +81,7 @@ session_start();
                                         echo '<p>Incident Category: ' . $report_details['Incident_Category'] . '</p>';
                                         echo '</div>';
                                         echo '<div class="report_info">';
-                                        echo '<p>Date: ' . $report_details['CurrentDate'] . '</p>';
+                                        echo '<p>Date: ' . $report_details['SubmittedDate'] . '</p>';
                                         echo '</div>';
                                         echo '<div class="report_info">';
                                         echo '<p>Description: ' . $report_details['Description'] . '</p>';

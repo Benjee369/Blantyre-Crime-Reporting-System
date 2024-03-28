@@ -5,7 +5,6 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -55,7 +54,13 @@ session_start();
                     you've witnessed a crime, experienced an incident, or have information to share, our platform is here to assist you.
                     </p>
                     <div class="btn-box">
-                      <a href="Report_Form.php" class="btn-1"> Fill in Police Report </a>
+                      <?php
+                      if (isset($_SESSION['user_id'])) {
+                          echo '<a href="Report_Form.php" class="btn-1">Fill in Police Report</a>';
+                      } else {
+                          echo '<a href="login.php" class="btn-1">Fill in Police Report</a>';
+                      }
+                      ?>
                     </div>
                   </div>
                 </div>
