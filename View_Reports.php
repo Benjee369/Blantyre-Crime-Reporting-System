@@ -36,11 +36,11 @@ session_start();
                     </div>
                 </div>
                 <div class="sort_reports">
-                    <a href="appointments.php?filter=all">All Reports</a>
-                    <a href="appointments.php?filter=unassigned">Unassigned Reports</a>
-                    <a href="appointments.php?filter=assigned">Assigned Reports</a>
-                    <a href="appointments.php?filter=closed">Closed Reports</a>
-                    <a href="appointments.php?filter=inprogress">In Progress Reports</a>
+                    <a href="View_Reports.php?filter=all">All Reports</a>
+                    <a href="View_Reports.php?filter=unassigned">Unassigned Reports</a>
+                    <a href="View_Reports.php?filter=assigned">Assigned Reports</a>
+                    <a href="View_Reports.php?filter=closed">Closed Reports</a>
+                    <a href="View_Reports.php?filter=inprogress">In Progress Reports</a>
                 </div>
 				<div class="row">
 					<div class="col-md-12">
@@ -51,7 +51,7 @@ session_start();
 										<th>Report ID</th>
 										<th>Reporter Name</th>
 										<th>Number of People Involved</th>
-										<th>Assigned Officer</th>
+										<th>Assigned Officer ID</th>
 										<th>Incident Category</th>
 										<th>Submission Time</th>
 										<th>Wittnessed Time</th>
@@ -67,19 +67,36 @@ session_start();
 
                                     switch ($filter) {
                                         case 'unassigned':
-                                            $query = "SELECT * FROM crimereports WHERE ID NOT IN (SELECT ReportID FROM assignments)";
+                                            $query = "SELECT c.*, a.OfficerID, a.PriorityLevel 
+                                                      FROM crimereports c 
+                                                      LEFT JOIN assignments a ON c.ID = a.ReportID 
+                                                      WHERE a.ReportID IS NULL";
                                             break;
+                                        
                                         case 'assigned':
-                                            $query = "SELECT * FROM crimereports WHERE ID IN (SELECT ReportID FROM assignments)";
+                                            $query = "SELECT c.*, a.OfficerID, a.PriorityLevel 
+                                                      FROM crimereports c 
+                                                      JOIN assignments a ON c.ID = a.ReportID";
                                             break;
+                                        
                                         case 'closed':
-                                            $query = "SELECT * FROM crimereports WHERE ID IN (SELECT ReportID FROM assignments WHERE Status = 'Closed')";
+                                            $query = "SELECT c.*, a.OfficerID, a.PriorityLevel 
+                                                      FROM crimereports c 
+                                                      JOIN assignments a ON c.ID = a.ReportID 
+                                                      WHERE a.Status = 'Closed'";
                                             break;
+                                        
                                         case 'inprogress':
-                                            $query = "SELECT * FROM crimereports WHERE ID IN (SELECT ReportID FROM assignments WHERE Status = 'In Progress')";
+                                            $query = "SELECT c.*, a.OfficerID, a.PriorityLevel 
+                                                      FROM crimereports c 
+                                                      JOIN assignments a ON c.ID = a.ReportID 
+                                                      WHERE a.Status = 'In Progress'";
                                             break;
+                                        
                                         default:
-                                            $query = "SELECT * FROM crimereports";
+                                            $query = "SELECT c.*, a.OfficerID, a.PriorityLevel
+                                            FROM crimereports c
+                                            LEFT JOIN assignments a ON c.ID = a.ReportID";
                                     }
 
                                     $stmt = $conn->prepare($query);
@@ -103,7 +120,7 @@ session_start();
                                             echo '</td>';
 
                                             echo '<td>';
-                                            echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
+                                            echo '<p>' . $incident_report['OfficerID'] . '</p>';
                                             echo '</td>';
 
                                             echo '<td>';
@@ -118,11 +135,18 @@ session_start();
                                             echo '<p>' . $incident_report['WitnessedDate'] . '</p>';
                                             echo '</td>';
 
+                                            echo '<td>';
+                                            echo '<p>' . $incident_report['PriorityLevel'] . '</p>';
+                                            echo '</td>';
+
+                                            echo '<td>';
+                                            echo '<a href="report_details.php?report_id=' . $incident_report['ID'] . '" class="">View Details</a>';
+                                            echo '</td>';
+
                                             echo '</tr>';
                                         }
                                     } else {
-                                        echo '<p class="no_review">No Reviews available at the moment,<br>
-                                        Be the first To leave a Review.</p>';
+                                        echo '<p class="no_review">No Reports available at the moment.</p>';
                                     }
                                     $stmt->close();
                                     $conn->close();

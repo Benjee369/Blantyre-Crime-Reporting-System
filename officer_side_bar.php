@@ -10,9 +10,6 @@
                     <a href="Manage_Reports.php"><i class="fa fa-user-md"></i> <span>Assigned Reports</span></a>
                 </li>
                 <li>
-                    <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Report Details</span></a>
-                </li>
-                <li>
                     <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Incident Map</span></a>
                 </li>
                 <li>

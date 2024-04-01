@@ -44,7 +44,7 @@ session_start();
 										<th>Report ID</th>
 										<th>Reporter Name</th>
 										<th>Number of People Involved</th>
-										<th>Assigned Officer</th>
+										<!-- <th>Assigned Officer</th> -->
 										<th>Incident Category</th>
 										<th>Submission Time</th>
 										<th>Wittnessed Time</th>
@@ -62,10 +62,11 @@ session_start();
                             $officer_id = $_SESSION['officer_id'];
 
                             // Prepare and execute SQL query with officer ID parameter
-                            $query = "SELECT crimereports.*
+                            $query = "SELECT crimereports.*, assignments.PriorityLevel
                                       FROM crimereports
                                       INNER JOIN assignments ON crimereports.ID = assignments.ReportID
                                       WHERE assignments.OfficerID = ?";
+
                             $stmt = $conn->prepare($query);
                             $stmt->bind_param("i", $officer_id);
                             $stmt->execute();
@@ -87,9 +88,9 @@ session_start();
                                     echo '<p>' . $incident_report['People_Involved'] . '</p>';
                                     echo '</td>';
         
-                                    echo '<td>';
-                                    echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
-                                    echo '</td>';
+                                    // echo '<td>';
+                                    // echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
+                                    // echo '</td>';
         
                                     echo '<td>';
                                     echo '<p>' . $incident_report['Incident_Category'] . '</p>';
@@ -102,7 +103,11 @@ session_start();
                                     echo '<td>';
                                     echo '<p>' . $incident_report['WitnessedDate'] . '</p>';
                                     echo '</td>';
-        
+                                    
+                                    echo '<td>';
+                                    echo '<p>' . $incident_report['PriorityLevel'] . '</p>';
+                                    echo '</td>';
+                                    
                                     echo '</tr>';
                                 }
                             } else {

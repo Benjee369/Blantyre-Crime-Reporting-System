@@ -40,7 +40,7 @@ session_start();
 
                         require_once 'DatabaseConn.php';
 
-                        $query = "SELECT c.*, u.*
+                        $query = "SELECT c.*, u.First_Name, u.Last_Name
                     FROM crimereports c, userdetails u
                     WHERE u.ID = c.UserID 
                     AND u.ID = ?
@@ -73,8 +73,8 @@ session_start();
 
                             echo '<td class="text-right">';
                             echo '<a href="Chat_Interface.php?report_id=' . $incident_report['ID'] . '" class="btn btn-outline-primary take-btn">Chat with Officer</a>';
-
                             echo '</td>';
+                            
                             echo '</tr>';
                         }
                     } else {

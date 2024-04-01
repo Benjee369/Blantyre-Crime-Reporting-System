@@ -63,7 +63,8 @@ session_start();
                         $user_details = $result->fetch_all(MYSQLI_ASSOC);
                         foreach ($user_details as $user_detail) {
                             echo '<div class="u_details">';
-                            echo '<p><b>Officer ID:</b> '.$user_detail['ID'] . ' '.'<br>'.'<b>Email: </b>' . $user_detail['Email'] .'</p>';
+                            echo '<p><b>Officer ID:</b> '.$user_detail['ID'] . ' '.'<br>'.'<b>Email: </b>' . $user_detail['Email'] .''.'<br>'.'<b>Full Name: </b>'.$user_detail['First_Name'].' '.$user_detail['Last_Name'].'</p>';
+                        
                             echo '<a class="btn btn-outline-primary take-btn">Block User</a>';
                             echo '</div>';
                         }

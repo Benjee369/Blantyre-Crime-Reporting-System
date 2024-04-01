@@ -13,7 +13,7 @@ session_start();
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap2.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style2.css">=
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
 </head>
 
 <body>
@@ -99,7 +99,7 @@ session_start();
 					<div class="main-card-thing">
 						<div class="card">
 							<div class="card-header">
-								<h4 class="card-title d-inline-block">Assigned Reports</h4> <a href="appointments.php" class="btn btn-primary float-right">View all</a>
+								<h4 class="card-title d-inline-block">Assigned Reports</h4> <a href="View_Reports.php" class="btn btn-primary float-right">View all</a>
 							</div>
 							<div class="card-body p-0">
 								<div class="table-responsive">

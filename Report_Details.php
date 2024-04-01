@@ -40,7 +40,7 @@ session_start();
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title d-inline-block">Report Details</h4>
-                                <a href="appointments.php" class="btn btn-primary float-right">View all</a>
+                                <a href="View_Reports.php" class="btn btn-primary float-right">View all</a>
                             </div>
                             <div class="card-body -0">
                                 <?php
@@ -60,6 +60,7 @@ session_start();
                                         echo '<h2> User Details'.'</h2>';
                                         echo '</div>';
 
+                                        // echo ''.$report_id.'';
                                         echo '<div class="report_info_mix">';
                                         echo '<div class="report_info2">';
                                         echo '<p>Full Name: ' . $report_details['First_Name'] . ' ' . $report_details['Last_Name'] . '</p>';
@@ -77,12 +78,25 @@ session_start();
                                         echo '<div>';
                                         echo '<h2 class="report_info"> Incident Details'.'</h2>';
                                         echo '</div>';
+
                                         echo '<div class="report_info">';
-                                        echo '<p>Incident Category: ' . $report_details['Incident_Category'] . '</p>';
+                                        echo '<p>Date: ' . $report_details['WitnessedDate'] . '</p>';
                                         echo '</div>';
+                                        
                                         echo '<div class="report_info">';
-                                        echo '<p>Date: ' . $report_details['SubmittedDate'] . '</p>';
+                                        echo '<p>Incident Category: ' . $report_details['Incident_Category'] . '</p>';    
                                         echo '</div>';
+                                    
+                                        echo '<div class="report_info_mix">';
+                                        echo '<div class="report_info2">';
+                                        echo '<p>Number Of People Involved: ' . $report_details['People_Involved'] . '</p>';
+                                        echo '</div>';
+
+                                        echo '<div class="report_info">';
+                                        echo '<p>Were you affected?: '. $report_details['If_Affected'] .'</p>';
+                                        echo '</div>';
+                                        echo '</div>';
+
                                         echo '<div class="report_info">';
                                         echo '<p>Description: ' . $report_details['Description'] . '</p>';
                                         echo '</div>';
@@ -101,7 +115,7 @@ session_start();
                                     if (isset($_SESSION['officer_id'])) {
                                     ?>
                                     <div class="initialise_chat">
-                                        <a type="button" class="btn btn-primary" href="Chat_Interface.php?report_id=<?php echo $report_id; ?>">Initialize Chat</a>
+                                        <a class="btn btn-primary" href="Chat_Interface.php?report_id=<?php echo $report_id; ?>">Initialize Chat</a>
                                     </div>
                                     <?php
                                     } else {
@@ -111,7 +125,7 @@ session_start();
                             </div>
                         </div>  
                     <?php
-                        if (isset($_SESSION['admin_id'])) {
+                        if (isset($_SESSION['admin_id'])) { 
                     ?>
 
                     <form action="AASPL.php" method="post">

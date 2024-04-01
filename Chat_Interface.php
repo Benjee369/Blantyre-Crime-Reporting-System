@@ -48,9 +48,11 @@ if (isset($_POST['message'], $_POST['report_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     
+
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
-    <link href="css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap2.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style2.css">
 </head>
 <body>
     <header class="header_section">
@@ -58,7 +60,15 @@ if (isset($_POST['message'], $_POST['report_id'])) {
     require_once 'nvbr.php'; 
     ?>
     </header>
-    <main class="chat-body">
+    <main class="">
+
+
+        <?php
+        if(isset($_SESSION['officer_id'])){
+        require_once 'officer_side_bar.php';
+        }
+        ?>
+        <main class="chat-body">
         <div class="chat-text" id="chat-text">
             <?php
             require_once 'DatabaseConn.php';
@@ -86,7 +96,7 @@ if (isset($_POST['message'], $_POST['report_id'])) {
                 echo '<div class="chat-message ' . $messageClass . '">';
                 echo '<b class="chat-message-sender"> ' . $sender_name . '</b>';
                 echo '<p class="the-chat-message">' . $row['message'] . '</p>';
-                // echo '<span class="chat-message-timestamp">' . $row['created_at'] . '</span>';
+                echo '<span class="chat-message-timestamp">' . $row['created_at'] . '</span>';
                 echo '</div>';
             }
 
@@ -102,11 +112,18 @@ if (isset($_POST['message'], $_POST['report_id'])) {
         <button type="submit" id="chat-button" >Send</button>
     </form>
     </main>
-    <Footer class="info_section">
+    </main>
     <?php
-    require_once 'Footer.php';
+    if(isset($_SESSION['user_id'])){
     ?>
-    </Footer>
+        <Footer class="info_section">
+            <?php
+            require_once 'Footer.php';
+            ?>
+        </Footer>
+    <?php
+    }
+    ?>
 
     <script>
         function refreshChat() {

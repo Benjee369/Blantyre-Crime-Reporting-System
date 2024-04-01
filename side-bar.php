@@ -13,7 +13,7 @@
                     <a href="Admin_Side.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                 </li>
 				<li>
-                    <a href="Appointments.php"><i class="fa fa-user-md"></i> <span>Manage reports</span></a>
+                    <a href="View_Reports.php"><i class="fa fa-user-md"></i> <span>Manage reports</span></a>
                 </li>
                 <li>
                     <a href="Manage_Users.php"><i class="fa fa-wheelchair"></i> <span>Manage Users</span></a>

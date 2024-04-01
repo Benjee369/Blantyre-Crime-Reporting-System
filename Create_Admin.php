@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <option value="officer">Officer</option>
                             </select>
                             <input type="text" name="firstname" placeholder="First Name" required>
-                            <input type="text" name="lastname" placeholder="Last Nama" required>
+                            <input type="text" name="lastname" placeholder="Last Name" required>
                             <input type="email" name="useremail" placeholder="E-mail Address" required>
                             <input type="password" name="userpassword" placeholder="Password" required>
                             <button type="submit">Create Account</button>
