@@ -79,10 +79,16 @@ session_start();
                                         echo '<h2 class="report_info"> Incident Details'.'</h2>';
                                         echo '</div>';
 
+                                        echo '<div class="report_info_mix">';
                                         echo '<div class="report_info">';
                                         echo '<p>Date: ' . $report_details['WitnessedDate'] . '</p>';
                                         echo '</div>';
                                         
+                                        echo '<div class="report_info">';
+                                        echo '<p>location: ' . $report_details['Location'] . '</p>';
+                                        echo '</div>';
+                                        echo '</div>';
+
                                         echo '<div class="report_info">';
                                         echo '<p>Incident Category: ' . $report_details['Incident_Category'] . '</p>';    
                                         echo '</div>';
@@ -109,18 +115,53 @@ session_start();
                                 ?> 
                                     <br>
                                     <br>
-                                    <?php
-                                    // Assuming $report_id is available in your code (e.g., from the report details page)
+                                    <div class="mixture3">
+                                        <?php
+                                            // Assuming $report_id is available in your code (e.g., from the report details page)
 
-                                    if (isset($_SESSION['officer_id'])) {
-                                    ?>
-                                    <div class="initialise_chat">
-                                        <a class="btn btn-primary" href="Chat_Interface.php?report_id=<?php echo $report_id; ?>">Initialize Chat</a>
-                                    </div>
+                                            if (isset($_SESSION['officer_id'])) {
+                                            ?>
+                                            <div class="initialise_chat">
+                                                <a class="btn btn-primary" href="Chat_Interface.php?report_id=<?php echo $report_id; ?>">Initialize Chat</a>
+                                            </div>
+                                            <?php
+                                            } else {
+                                                // ... button or message for users who can't initiate chats
+                                            }
+                                        ?>
+                                        
+                                        <?php
+                                            if (isset($_SESSION['officer_id'])) {
+                                        ?>
+                                        <div class="approve_payment">
+                                            <form method="post">
+                                                <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
+                                                <input type="submit" class="btn btn-primary float-right" value="Approve for Payment">
+                                            </form>
+                                        </div>                                                
+                                    </div>   
                                     <?php
-                                    } else {
-                                        // ... button or message for users who can't initiate chats
-                                    }
+                                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                require_once 'DatabaseConn.php';
+                                                $report_id = isset($_POST['report_id']) ? $_POST['report_id'] : null;
+
+                                                if ($report_id !== null) {
+                                                    $query = "UPDATE assignments SET paymentapproved = 1 WHERE reportID = ?";
+                                                    $stmt = $conn->prepare($query);
+                                                    $stmt->bind_param("i", $report_id);
+                                                    $stmt->execute();
+
+                                                    if ($stmt->affected_rows > 0) {
+                                                        echo "Payment approved successfully.";
+                                                    } else {
+                                                        echo '<p class="wrong_detai">Payment has already been approved</p>';
+                                                    }
+                                                    $stmt->close();
+                                                } else {
+                                                    echo "Error: Report ID not provided.";
+                                                }
+                                            }
+                                        }
                                     ?>
                             </div>
                         </div>  
@@ -205,7 +246,7 @@ session_start();
 
                                         $stmt->close();
                                     } else {
-                                        echo "Error: Report ID or status not provided.";
+                                        echo "";
                                     }
                                 }
                                 }

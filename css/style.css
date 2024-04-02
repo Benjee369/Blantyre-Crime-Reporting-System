@@ -1383,6 +1383,11 @@ form button[type=submit]{
   padding: 5px;
 }
 
+.mixture3{
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
 .report_detail input{
   border: 1px rgb(187, 187, 187) solid;
   outline: none;
@@ -1627,4 +1632,8 @@ form button[type=submit]{
 
 .no_review{
   margin-left: 15px;
+}
+
+.update_status{
+  padding: 20px;
 }

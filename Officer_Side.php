@@ -129,7 +129,6 @@ session_start();
                         foreach ($incident_reports as $incident_report) {
                             echo '<tr>';
                             echo '<td style="min-width: 200px;">';
-                            echo '<a class="avatar" href="profile.html">' . strtoupper(substr($incident_report['First_Name'], 0, 1)) . '</a>';
                             echo '<h2><a href="profile.html">' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '<span>' . $incident_report['Location'] . '</span></a></h2>';
                             echo '</td>';
 

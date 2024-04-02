@@ -35,63 +35,82 @@ session_start();
 								<div class="table-responsive">
 									<table class="table mb-0">
 										<tbody>
-                                        <?php
-                        $userId = $_SESSION['user_id'];
+                      <?php
+                    $userId = $_SESSION['user_id'];
 
-                        require_once 'DatabaseConn.php';
+                    require_once 'DatabaseConn.php';
 
-                        $query = "SELECT c.*, u.First_Name, u.Last_Name
-                    FROM crimereports c, userdetails u
-                    WHERE u.ID = c.UserID 
-                    AND u.ID = ?
-                    ORDER BY c.SubmittedDate desc";
+                    $query = "SELECT c.*, u.First_Name, u.Last_Name, a.Status, a.PaymentApproved 
+                    FROM crimereports c
+                    INNER JOIN userdetails u ON u.ID = c.UserID 
+                    LEFT JOIN assignments a ON c.ID = a.ReportID
+                    WHERE u.ID = ? 
+                    ORDER BY c.SubmittedDate DESC
                     
+                      ";
+                
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("i", $userId);
+                $stmt->execute();
 
-                    $stmt = $conn->prepare($query);
-                    $stmt->bind_param("i", $userId);
-                    $stmt->execute();
+                $result = $stmt->get_result();
 
-                    $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    $incident_reports = $result->fetch_all(MYSQLI_ASSOC);
+                    foreach ($incident_reports as $incident_report) {
+                        echo '<tr>';
+                        echo '<td style="min-width: 200px;">';
+                        echo '<p><b>' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '</b></h2>';
+                        echo '</td>';
 
-                    if ($result->num_rows > 0) {
-                        $incident_reports = $result->fetch_all(MYSQLI_ASSOC);
-                        foreach ($incident_reports as $incident_report) {
-                            echo '<tr>';
-                            echo '<td style="min-width: 200px;">';
-                            echo '<h2>' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '<span>' . $incident_report['Location'] . '</span></h2>';
-                            echo '</td>';
+                        // echo '<td>';
+                        // echo '<h5 class="time-title p-0">Coordinates</h5>';
+                        // echo '<p>' . $incident_report['Location'] . '</p>';
+                        // echo '</td>';
 
-                            echo '<td>';
-                            echo '<h5 class="time-title p-0">Incident Category</h5>';
-                            echo '<p>' . $incident_report['Incident_Category'] . '</p>';
-                            echo '</td>';
+                        echo '<td>';
+                        echo '<h5 class="time-title p-0">Incident Category</h5>';
+                        echo '<p>' . $incident_report['Incident_Category'] . '</p>';
+                        echo '</td>';
 
-                            echo '<td>';
-                            echo '<h5 class="time-title p-0">Submitted Date</h5>';
-                            echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
-                            echo '</td>';
+                        echo '<td>';
+                        echo '<h5 class="time-title p-0">Report Status</h5>';
+                        echo '<p>' . $incident_report['Status'] . '</p>';
+                        echo '</td>';
 
-                            echo '<td class="text-right">';
-                            echo '<a href="Chat_Interface.php?report_id=' . $incident_report['ID'] . '" class="btn btn-outline-primary take-btn">Chat with Officer</a>';
-                            echo '</td>';
-                            
-                            echo '</tr>';
+                        echo '<td>';
+                        echo '<h5 class="time-title p-0">Submitted Date</h5>';
+                        echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
+                        echo '</td>';
+
+                        echo '<td class="text-right">';
+                        if ($incident_report['PaymentApproved'] == 1) {
+                            echo '<a href="checkout.php?report_id=' . $incident_report['ID'] . '" class="btn btn-outline-primary take-btn">Pay Now</a>';
+                        } else {
+                            echo '<button class="btn btn-outline-secondary take-btn" disabled>Payment Approval Pending</button>';
                         }
-                    } else {
-                        echo '<p class="no_review">No Reviews available at the moment,<br>
-                        Be the first To leave a Review.</p>';
+                        echo '</td>';
+                        
+                        echo '<td class="text-right">';
+                        echo '<a href="Chat_Interface.php?report_id=' . $incident_report['ID'] . '" class="btn btn-outline-primary take-btn">Chat with Officer</a>';
+                        echo '</td>';
+
+                        echo '</tr>';
                     }
-                    $stmt->close();
-                    $conn->close();            
-                    ?>
-										</tbody>
-									</table>
-								</div>
+                } else {
+                    echo '<p class="no_review">No Reports Available at the moment</p>';
+                }
+                $stmt->close();
+                $conn->close();            
+                ?>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
 				</div>
-        </div>
+			</div>
+    </div>
     </main>
     <Footer class="info_section">
     <?php

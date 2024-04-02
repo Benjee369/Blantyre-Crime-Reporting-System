@@ -1,4 +1,13 @@
 <?php
+require 'PHPMailer-master\src\PHPMailer.php';
+require 'PHPMailer-master\src\SMTP.php';
+require 'PHPMailer-master\src\Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 session_start();
@@ -43,6 +52,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error_message = "Error inserting incident report: " . $insertReportStmt->error;
         }
 
+         // Create and configure PHPMailer instance
+         $mail = new PHPMailer();
+         $mail->isSMTP();
+         $mail->Host = 'smtp.gmail.com';
+         $mail->SMTPAuth = true;
+         $mail->Username = 'benjaminphiri369@gmail.com';
+         $mail->Password = 'ortk mwod jnkf pbif';
+         $mail->SMTPSecure = 'ssl';
+         $mail->Port = 465;
+ 
+         // Set email content
+         $mail->setFrom('johnbanda15243@gmail.com', 'Your Name');
+         $mail->addAddress('benjaminphiri369@gmail.com', 'Benjamin Phiri');
+         $mail->Subject = 'New Police Report Submitted';
+         $mail->Body = "A new police report has been submitted.\n\nFirst Name: $FirstName\nLast Name: $LastName\nIncident Category: $IncidentCategory\nWitnessed Date: $WitnessedDate\nDescription: $Description\nPeople Involved: $PeopleInvolved\nAffected: " . ($IfAffected ? 'Yes' : 'No') . "\nLocation: $Location";
+ 
+         // Send the email
+         if ($mail->send()) {
+             $success_message = "Incident report successfully submitted. The admin has been notified.";
+         } else {
+             $error_message = "Error sending email: " . $mail->ErrorInfo;
+         }
+
         $insertReportStmt->close();
         $conn->close();
     } catch (Exception $e) {
@@ -61,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
     <header>
@@ -147,8 +180,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <!-- Coordinates input -->
             <label for="coordinates">Coordinates:</label>
-            <input type="text" id="coordinates" name="coordinates" readonly>
+            <input type="text" id="locationInput" name="coordinates" readonly>
+            <input type="hidden" id="latitudeInput" name="latitude">
+            <input type="hidden" id="longitudeInput" name="longitude">
             <br>
+
             <button type="submit">Submit Report</button>
           </form>
         </div>
@@ -159,8 +195,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <footer class="info_section">
         <?php require_once 'Footer.php'; ?>
     </footer>
-    
-  <script src="js/mapAPI.js" defer></script>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var locationInput = document.getElementById('locationInput');
+        var latitudeInput = document.getElementById('latitudeInput');
+        var longitudeInput = document.getElementById('longitudeInput');
+
+        function onMapClick(e) {
+            locationInput.value = e.latlng.lat.toFixed(6) + ', ' + e.latlng.lng.toFixed(6);
+            latitudeInput.value = e.latlng.lat;
+            longitudeInput.value = e.latlng.lng;
+        }
+
+        map.on('click', onMapClick);
+    </script>
+  <!-- <script src="js/mapAPI.js" defer></script> -->
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.js"></script>
   <script src="js/custom.js"></script>
