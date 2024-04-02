@@ -1,39 +1,74 @@
 <?php
 
 require __DIR__ . "/vendor/autoload.php";
+require_once 'DatabaseConn.php';
 
+// Assuming the Stripe secret key is stored securely in an environment variable
 $stripe_secret_key = "sk_test_51P0hxTEdiO8lrsXZW35QYB0qJUaRKXPeskukHB73OUGsFN9JQf8wJ7Lbw6NSD9wLbL5l9kSKWnVEkSvKEVB2pmlg00FOMLVoZw";
 
-\Stripe\Stripe::setApiKey($stripe_secret_key);
+try {
+    \Stripe\Stripe::setApiKey($stripe_secret_key);
 
-$checkout_session = \Stripe\Checkout\Session::create([
-    "mode" => "payment",
-    "success_url" => "http://localhost/guader-html/success.php",
-    "cancel_url" => "http://localhost/guader-html/Report_History.php",
-    "locale" => "auto",
-    "line_items" => [
-        [
-            "quantity" => 1,
-            "price_data" => [
-                "currency" => "usd",
-                "unit_amount" => 2000,
-                "product_data" => [
-                    "name" => "T-shirt"
+    // Extract report ID from request (adjust based on your implementation)
+    $reportId = filter_var($_GET['report_id'], FILTER_SANITIZE_NUMBER_INT); // Sanitize input
+
+    if (!$reportId) {
+        throw new Exception("Invalid report ID provided.");
+    }
+
+    // Prepare database query
+    $query = "SELECT c.Incident_Category AS reportCategory, u.First_Name, u.Last_Name, rp.Price
+               FROM crimereports c
+               INNER JOIN userdetails u ON u.ID = c.UserID
+               LEFT JOIN reportprice rp ON rp.Category = c.Incident_Category
+               WHERE c.ID = ?
+               ORDER BY c.SubmittedDate DESC";
+
+    // Execute the query with prepared statement
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $reportId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Fetch report information and price
+    $reportInfo = $result->fetch_assoc();
+
+    if (!$reportInfo) {
+        throw new Exception("Report not found with ID: $reportId");
+    }
+
+    // Extract report details
+    $reportName = $reportInfo['reportCategory'];
+    $unitAmount = $reportInfo['Price'];
+
+    $amount_in_cents = $unitAmount * 100;
+
+    // Create a checkout session with retrieved details
+    $checkoutSession = \Stripe\Checkout\Session::create([
+        "mode" => "payment",
+        "success_url" => "http://localhost/guader-html/success.php",
+        "cancel_url" => "http://localhost/guader-html/Report_History.php",
+        "locale" => "auto",
+        "line_items" => [
+            [
+                "quantity" => 1,
+                "price_data" => [
+                    "currency" => "MWK",
+                    "unit_amount" => $amount_in_cents,
+                    "product_data" => [
+                        "name" => $reportName
+                    ]
                 ]
             ]
-        ],
-        [
-            "quantity" => 2,
-            "price_data" => [
-                "currency" => "usd",
-                "unit_amount" => 700,
-                "product_data" => [
-                    "name" => "Hat"
-                ]
-            ]
-        ]        
-    ]
-]);
+        ]
+    ]);
 
-http_response_code(303);
-header("Location: " . $checkout_session->url);
+    // Redirect the user to the checkout session URL
+    http_response_code(303);
+    header("Location: " . $checkoutSession->url);
+
+} catch (Exception $e) {
+    // Handle errors (e.g., display an error message to the user)
+    echo "Error: " . $e->getMessage();
+    exit();
+}

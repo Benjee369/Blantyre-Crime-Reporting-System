@@ -40,14 +40,15 @@ session_start();
 
                     require_once 'DatabaseConn.php';
 
-                    $query = "SELECT c.*, u.First_Name, u.Last_Name, a.Status, a.PaymentApproved 
+                    $query = "SELECT c.*, u.First_Name, u.Last_Name, a.Status, a.PaymentApproved, rp.Price
                     FROM crimereports c
-                    INNER JOIN userdetails u ON u.ID = c.UserID 
+                    INNER JOIN userdetails u ON u.ID = c.UserID
                     LEFT JOIN assignments a ON c.ID = a.ReportID
-                    WHERE u.ID = ? 
-                    ORDER BY c.SubmittedDate DESC
+                    LEFT JOIN ReportPrice rp ON c.Incident_Category = rp.Category
+                    WHERE u.ID = ?
+                    ORDER BY c.SubmittedDate DESC                    
+                    ";
                     
-                      ";
                 
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("i", $userId);
@@ -81,6 +82,11 @@ session_start();
                         echo '<td>';
                         echo '<h5 class="time-title p-0">Submitted Date</h5>';
                         echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
+                        echo '</td>';
+
+                        echo '<td>';
+                        echo '<h5 class="time-title p-0">Price</h5>';
+                        echo '<p>' . $incident_report['Price'] . '</p>';
                         echo '</td>';
 
                         echo '<td class="text-right">';
