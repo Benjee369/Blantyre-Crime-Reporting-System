@@ -10,10 +10,7 @@
                     <a href="Manage_Reports.php"><i class="fa fa-user-md"></i> <span>Assigned Reports</span></a>
                 </li>
                 <li>
-                    <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Incident Map</span></a>
-                </li>
-                <li>
-                    <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Messaging</span></a>
+                    <a href="All_Maps.php"><i class="fa fa-calendar"></i> <span>Incident Map</span></a>
                 </li>
             </ul>
         </div>

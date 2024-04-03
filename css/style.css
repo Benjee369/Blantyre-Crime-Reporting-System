@@ -1587,27 +1587,22 @@ form button[type=submit]{
 
 .chat-body{
   width: 50%;
-  margin-top: 74px;
+  margin-top: 85px;
   margin-left: auto;
   margin-right: auto;
   border: 1px solid black;
+  width: 30%;
   border-radius: 4px 4px 0px 0px ;
 }
 
-.user-message {
-  border: 1px solid rgb(196, 196, 196);
-  background-color: #d8d8d8;
-  text-align: left; 
-  margin-left: 10px; 
-}
 .officer-message {
   border: 1px solid rgb(196, 196, 196);
-  margin-left: auto;
-  color: white;
-  background-color: #3f3f3f;
-  text-align: right; 
+  width: 70%;
+  color: rgb(0, 0, 0);
+  background-color: #d3d3d3;
   margin-right: 10px;
 }
+
 
 .chat-text{
   padding: 20px;
@@ -1615,11 +1610,22 @@ form button[type=submit]{
 }
 
 #chat-button{
-  width: 14%;
-  height: 43px;
+  width: 20%;
+  height: 40px;
   padding: 5px;
-  margin-bottom: 10px;
-  border: 1px solid black;
+  margin: 0px;
+  border: 1px solid rgb(205, 205, 205);
+}
+
+#chat-form textarea{
+  height: 40px;
+  margin: 0px;
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 4px;
+}
+
+#chat-form{
+  height: 60px;
 }
 
 .form-chat{
@@ -1636,4 +1642,9 @@ form button[type=submit]{
 
 .update_status{
   padding: 20px;
+}
+
+.page-wrapper1{
+  margin-top: 86px;
+  margin-left: 240px;
 }

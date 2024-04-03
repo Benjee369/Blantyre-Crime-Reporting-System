@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $stmt->bind_param("s", $Email_Address);
         $stmt->execute();
-        $stmt->bind_result($userId, $storedHashedPassword);
+        $stmt->bind_result($adminId, $storedHashedPassword);
         $stmt->fetch();
         
         if ($stmt->errno) {
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if ($storedHashedPassword !== null && password_verify($password, $storedHashedPassword)) {
             $_SESSION['admin_email'] = $Email_Address;
-            $_SESSION["admin_id"] = $userId;
+            $_SESSION["admin_id"] = $adminId;
             $_SESSION["isloggedin"] = true;
             $_SESSION["invalidCredentials"] = false;
             header("Location: Admin_Side.php");
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $stmt1->bind_param("s", $Email_Address);
         $stmt1->execute();
-        $stmt1->bind_result($userId, $storedHashedPassword);
+        $stmt1->bind_result($officerId, $storedHashedPassword);
         $stmt1->fetch();
         
         if ($stmt1->errno) {
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt2->close(); // Close the statement
         
             // Set the officer ID in the session variable
-            $_SESSION['officer_id'] = $officerId;
+            $_SESSION["officer_id"] = $officerId;
         
             $_SESSION["isloggedin"] = true;
             $_SESSION["invalidCredentials"] = false;

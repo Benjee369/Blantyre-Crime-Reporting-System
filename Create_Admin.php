@@ -6,8 +6,8 @@ session_start();
 require_once 'DatabaseConn.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $FirstName = $_POSt["firstname"];
-    $LastName = $_POSt["lastname"];
+    $FirstName = $_POST["firstname"];
+    $LastName = $_POST["lastname"];
     $Email = $_POST["useremail"];
     $Password = $_POST["userpassword"];
     $Role = $_POST["userrole"]; // Assuming the role is set in a dropdown/select menu
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($checkResult->num_rows > 0) {
         $_SESSION['Email_address_taken'] = true;
-        header("Location: createadmin.php");
+        header("Location: Create_Admin.php");
         exit();
     } else {
         $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
