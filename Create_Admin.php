@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $LastName = $_POST["lastname"];
     $Email = $_POST["useremail"];
     $Password = $_POST["userpassword"];
-    $Role = $_POST["userrole"]; // Assuming the role is set in a dropdown/select menu
+    $Role = $_POST["userrole"];
 
     $checkStmt = $conn->prepare("SELECT ID, Email FROM admindetails WHERE Email = ?");
     $checkStmt->bind_param("s", $Email);
