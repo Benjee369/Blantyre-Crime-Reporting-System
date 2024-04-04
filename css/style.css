@@ -366,12 +366,14 @@ a:focus {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: 1px solid transparent;
+  border-radius: 4px;
 }
 
 .slider_section .detail-box .btn-box .btn-1:hover {
   background-color: transparent;
   border-color: #ffffff;
   color: #ffffff;
+  text-decoration: none;
 }
 
 .slider_section .detail-box .btn-box .btn-2 {
@@ -1367,6 +1369,22 @@ form button[type=submit]{
 .Test{
   padding: 30px;
 }
+.report_detail1{
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.report_detail1 input{
+  border: 1px rgb(187, 187, 187) solid;
+  outline: none;
+  border-radius: 5px;
+  width: 45%;
+  color: #000000;
+  height: 45px;
+  padding-left: 15px;
+  background-color: #ffffff;
+}
+
 .report_detail{
   margin-top: 15px;
   margin-bottom: 15px;
@@ -1517,33 +1535,71 @@ form button[type=submit]{
   justify-content: space-between;
 }
 
+.card-body1{
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.report_controls{
+  background-color: #ffffff;
+  border: 1px solid rgb(74, 74, 74);
+  border-radius: 2px;
+  padding: 5px;
+}
+
 .graph-wrapper{
   width: 80%;
   margin-top: 90px;
   margin-left: 230px;
 }
 
+.card-body1{
+  width: 100%;
+}
+
 .report_form1{
-  border: 1px solid black;
-  border-radius: 0px;
-  width: 65%;
+  width: 66%;
+}
+.report_details {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
 }
 
-.report_info{
-  border: 1px solid black;
-  padding: 5px;
+.report_info {
+  margin-bottom: 10px;
 }
 
-.report_info2{
-  border: 1px solid black;
-  margin-right: 20px;
-  padding: 5px;
+.report_info h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
 }
 
-.report_info_mix{
+.report_info_mix {
   display: flex;
-  
+  flex-wrap: wrap;
+  margin-bottom: 10px;
 }
+
+.report_info2, .report_info {
+  width: 48%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.report_info2:last-child, .report_info:last-child {
+  margin-right: 0;
+}
+
 
 .history{
   margin-top: 69px;
@@ -1647,4 +1703,15 @@ form button[type=submit]{
 .page-wrapper1{
   margin-top: 86px;
   margin-left: 240px;
+}
+
+.main_success{
+  margin-top: 69px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.success_init{
+  display: flex;
+  height: 50.7%;
 }

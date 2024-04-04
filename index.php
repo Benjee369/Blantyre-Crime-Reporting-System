@@ -24,7 +24,6 @@ session_start();
   <div class="hero_area">
     <div class="hero_bg_box">
       <div class="img-box">
-        <img src="images/hero-bg.jpg" alt="">
       </div>
     </div>
 
@@ -77,52 +76,6 @@ session_start();
     </section>
     <!-- end slider section -->
   </div>
-<!--Report Type Section-->
-
-<section class="contact_section layout_padding">
-    <div class="contact_bg_box">
-      <div class="img-box">
-        <img src="images/contact-bg.jpg" alt="">
-      </div>
-    </div>
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Get In touch
-        </h2>
-      </div>
-      <div class="">
-        <div class="row">
-          <div class="col-md-7 mx-auto">
-            <form action="#">
-              <div class="contact_form-container">
-                <div>
-                  <div>
-                    <input type="text" placeholder="Full Name" />
-                  </div>
-                  <div>
-                    <input type="email" placeholder="Email " />
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Phone Number" />
-                  </div>
-                  <div class="">
-                    <input type="text" placeholder="Message" class="message_input" />
-                  </div>
-                  <div class="btn-box ">
-                    <button type="submit">
-                      Send
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-<!--End Report Type Section--!
   <!-- about section -->
 
   <section class="about_section layout_padding">
@@ -143,14 +96,14 @@ session_start();
               </h2>
             </div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-              in reprehenderit in voluptate velit
+            Welcome to the Blantyre Police Station! We are a dedicated team 
+              of law enforcement professionals committed to serving and protecting 
+              the community of Blantyre. With a rich history dating back decades, 
+              we have been steadfast in our mission to uphold law and order, promote 
+              public safety, and foster trust and cooperation within our community.
             </p>
             <div class="btn-box">
-              <a href="">
+              <a href="about.php">
                 Read More
               </a>
             </div>

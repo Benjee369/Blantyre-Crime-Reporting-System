@@ -13,13 +13,13 @@
                     <a href="Admin_Side.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                 </li>
 				<li>
-                    <a href="View_Reports.php"><i class="fa fa-user-md"></i> <span>Manage reports</span></a>
+                    <a href="View_Reports.php"><i class="fa fa-folder-open"></i> <span>Manage reports</span></a>
                 </li>
                 <li>
-                    <a href="Manage_Users.php"><i class="fa fa-wheelchair"></i> <span>Manage Users</span></a>
+                    <a href="Manage_Users.php"><i class="fa fa-user"></i> <span>Manage Users</span></a>
                 </li>
                 <li>
-                    <a href="Manage_Officers.php"><i class="fa fa-calendar"></i> <span>Officers</span></a>
+                    <a href="Manage_Officers.php"><i class="fa fa-user-secret"></i> <span>Officers</span></a>
                 </li>
                 <li>
                     <a href="Statistics.php"><i class="fa fa-calendar"></i> <span>Statistics</span></a>

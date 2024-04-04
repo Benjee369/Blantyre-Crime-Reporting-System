@@ -27,22 +27,15 @@ session_start();
     </header>
         <!-- nav2 end -->
     <div class="main-wrapper">
-    <?php
-        if (isset($_SESSION['officer_id'])) {
-            require_once 'officer_side_bar.php';
-        } else {
-            require_once 'side-bar.php';
-        }
-    ?>
         <!-- end side bar thing -->
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
-                    <div class="report_form1">
+                    <div id="reportContainer" class="report_form1">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title d-inline-block">Report Details</h4>
-                                <a href="View_Reports.php" class="btn btn-primary float-right">View all</a>
+                                <button id="printReport" class="btn btn-primary float-right">Print/Save Report</button>
                             </div>
                             <div class="card-body1">
                                 <?php
@@ -127,130 +120,15 @@ session_start();
                             </div>
                         </div>
                         <!--Where the report_details controls go-->
-                        <div class="report_controls">
-                            <?php
-                            if(isset($_SESSION['officer_id'])){
-                            ?>
-                            <?php
-                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                    require_once 'DatabaseConn.php';
-                                    $report_id = isset($_POST['report_id']) ? $_POST['report_id'] : null;
+                        
+                    
 
-                                    if (isset($_POST['approve_payment'])) {
-                                        if ($report_id !== null) {
-                                            $query = "UPDATE assignments SET paymentapproved = 1 WHERE reportID = ?";
-                                            $stmt = $conn->prepare($query);
-                                            $stmt->bind_param("i", $report_id);
-                                            $stmt->execute();
-
-                                            if ($stmt->affected_rows > 0) {
-                                                echo "Payment approved successfully.";
-                                            } else {
-                                                echo '<p class="wrong_detai">Payment has already been approved</p>';
-                                            }
-                                            $stmt->close();
-                                        } else {
-                                            echo "Error: Report ID not provided.";
-                                        }
-                                    }
-
-                                    // Check if the update status form was submitted
-                                    if (isset($_POST['update_status'])) {
-                                        $status = isset($_POST['status']) ? $_POST['status'] : null;
-
-                                        if ($report_id !== null && $status !== null) {
-                                            $query = "UPDATE assignments SET Status = ? WHERE ReportID = ?";
-                                            $stmt = $conn->prepare($query);
-                                            $stmt->bind_param("si", $status, $report_id);
-                                            $stmt->execute();
-
-                                            if ($stmt->affected_rows > 0) {
-                                                echo "Status successfully updated.";
-                                            } else {
-                                                echo "Error updating status: " . $stmt->error;
-                                            }
-
-                                            $stmt->close();
-                                        } else {
-                                            echo "";
-                                        }
-                                    }
-                                }
-                                ?>
-
-                                <!-- Your HTML code -->
-                                <div class="mixture3">
-                                    <div class="initialise_chat">
-                                        <a class="btn btn-primary" href="Chat_Interface.php?report_id=<?php echo $report_id; ?>">Initialize Chat</a>
-                                    </div>
-                                    <div class="approve_payment">
-                                        <form method="post">
-                                            <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
-                                            <input type="hidden" name="approve_payment" value="1"> <!-- Add this hidden input field -->
-                                            <input type="submit" class="btn btn-primary float-right" value="Approve for Payment">
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="update_status">
-                                    <form method="post">
-                                        <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
-                                        <input type="hidden" name="update_status" value="1"> <!-- Add this hidden input field -->
-                                        <label for="status">Update Status of Report:</label>
-                                        <select name="status" required>
-                                            <option value="">Select Status</option>
-                                            <option value="On Hold">On Hold</option>
-                                            <option value="Closed">Closed</option>
-                                            <option value="Reopened">Reopened</option>
-                                        </select>
-                                        <input class="btn btn-primary float-right" type="submit" value="Update Status">
-                                    </form>
-                                </div>
-                                <?php
-                                } elseif(isset($_SESSION['admin_id'])){
-                                ?>
-                                <form action="AASPL.php" method="post">
-                                    <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
-                                    <label for="officer_id">Assign to Officer:</label>
-                                    <select name="officer_id" required>
-                                        <option value="">Select Officer</option>
-                                        <?php
-                                        require_once 'DatabaseConn.php';
-                                        $query = "SELECT ID, Email FROM admindetails WHERE Role = 'officer'";
-                                        $stmt = $conn->prepare($query);
-                                        $stmt->execute();
-                                        $officers = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-                                        $stmt->close();
-
-                                        foreach ($officers as $officer) {
-                                            echo '<option value="' . $officer['ID'] . '">' . $officer['Email'] . '</option>';
-                                        }
-                                        ?>
-                                    </select>
-
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                    <label for="priority_level">Priority Level:</label>
-                                    <select name="priority_level" required>
-                                        <option value="">Select Priority Level</option>
-                                        <option value="High">High</option>
-                                        <option value="Medium">Medium</option>
-                                        <option value="Low">Low</option>
-                                    </select>
-                                    <input class="btn btn-primary" type="submit" value="Assign and Set Priority">
-                                </form> 
-                                <?php
-                                }
-                                ?>
-                        </div>
-                    </div> 
-
-                    <div class="col-12 col-md-6 col-lg-4 col-xl-4">
+                    <div class="">
                         <div class="card member-panel">
 							<div class="card-header bg-white">
 								<h4 class="card-title mb-0">Multimedia Attachments</h4>
 							</div>
-                            <div class="card-body">
+                            <div class="card-body1">
                             <?php
                                 require_once 'DatabaseConn.php';
 
@@ -297,7 +175,7 @@ session_start();
                             ?>
                             </div>
                         </div>
-                        <div class="card member-panel">
+                        <div class="card member-panel1">
 							<div class="card-header bg-white">
 								<h4 class="card-title mb-0">Incident Location</h4>
 							</div>
@@ -364,8 +242,35 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>    
+        <script>
+        document.getElementById("printReport").addEventListener("click", function() {
+    printReport();
+        });
+
+        function printReport() {
+            // Open a new window for printing
+            var printWindow = window.open('', '_blank');
+            // Get the content of the report container
+            var reportContent = document.getElementById("reportContainer").innerHTML;
+            // Include CSS styles
+            var styles = document.head.getElementsByTagName("link");
+            var styleContent = '';
+            for (var i = 0; i < styles.length; i++) {
+                if (styles[i].rel === "stylesheet") {
+                    styleContent += styles[i].outerHTML;
+                }
+            }
+            // Write the content and styles into the new window
+            printWindow.document.write('<html><head><title>Report</title>' + styleContent + '</head><body>' + reportContent + '</body></html>');
+            // Close the document after printing
+            printWindow.document.close();
+            // Print the window
+            printWindow.print();
+        }
+        </script>
 </body>
 </html>

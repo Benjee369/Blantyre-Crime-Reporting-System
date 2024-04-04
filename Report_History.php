@@ -40,7 +40,7 @@ session_start();
 
                     require_once 'DatabaseConn.php';
 
-                    $query = "SELECT c.*, u.First_Name, u.Last_Name, a.Status, a.PaymentApproved, rp.Price
+                    $query = "SELECT c.*, u.First_Name, u.Last_Name, a.Status, a.PaymentApproved, a.Paid, rp.Price
                     FROM crimereports c
                     INNER JOIN userdetails u ON u.ID = c.UserID
                     LEFT JOIN assignments a ON c.ID = a.ReportID
@@ -86,17 +86,19 @@ session_start();
 
                         echo '<td>';
                         echo '<h5 class="time-title p-0">Price</h5>';
-                        echo '<p>' . $incident_report['Price'] . '</p>';
+                        echo '<p> MWK ' . $incident_report['Price'] . '</p>';
                         echo '</td>';
 
                         echo '<td class="text-right">';
-                        if ($incident_report['PaymentApproved'] == 1) {
+                        if ($incident_report['PaymentApproved'] == 1 && $incident_report['Paid'] == 0) {
                             echo '<a href="checkout.php?report_id=' . $incident_report['ID'] . '" class="btn btn-outline-primary take-btn">Pay Now</a>';
+                        } elseif ($incident_report['Paid'] == 1) {
+                            echo '<a href="print_report.php?report_id=' . $incident_report['ID'] . '" class="btn btn-outline-success take-btn">Print Report</a>';
                         } else {
-                            echo '<button class="btn btn-outline-secondary take-btn" disabled>Payment Approval Pending</button>';
+                            echo '<button class="btn btn-outline-secondary take-btn" disabled>Payment Approval Pending</button>';                            echo '';
                         }
                         echo '</td>';
-                        
+
                         echo '<td class="text-right">';
                         echo '<a href="Chat_Interface.php?report_id=' . $incident_report['ID'] . '" class="btn btn-outline-primary take-btn">Chat with Officer</a>';
                         echo '</td>';

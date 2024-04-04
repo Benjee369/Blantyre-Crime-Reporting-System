@@ -53,18 +53,19 @@
                 Who Are We?
               </h2>
             </div>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-              in reprehenderit in voluptate velit
+            <p>Welcome to the Blantyre Police Station! We are a dedicated team 
+              of law enforcement professionals committed to serving and protecting 
+              the community of Blantyre. With a rich history dating back decades, 
+              we have been steadfast in our mission to uphold law and order, promote 
+              public safety, and foster trust and cooperation within our community.
+              <br><br>
+              At Blantyre Police Station, we believe in the core values of integrity, 
+              professionalism, and compassion. Our officers are trained to handle a 
+              wide range of situations with diligence, fairness, and respect for all
+               individuals. Whether responding to emergencies, conducting investigations,
+                or engaging with community members, our goal is to ensure the safety
+                 and well-being of every resident in Blantyre.
             </p>
-            <div class="btn-box">
-              <a href="">
-                Read More
-              </a>
-            </div>
           </div>
         </div>
       </div>

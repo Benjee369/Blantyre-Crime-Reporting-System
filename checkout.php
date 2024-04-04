@@ -1,4 +1,7 @@
 <?php
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+session_start();
 
 require __DIR__ . "/vendor/autoload.php";
 require_once 'DatabaseConn.php';
@@ -10,9 +13,9 @@ try {
     \Stripe\Stripe::setApiKey($stripe_secret_key);
 
     // Extract report ID from request (adjust based on your implementation)
-    $reportId = filter_var($_GET['report_id'], FILTER_SANITIZE_NUMBER_INT); // Sanitize input
+    $report_id = filter_var($_GET['report_id'], FILTER_SANITIZE_NUMBER_INT); // Sanitize input
 
-    if (!$reportId) {
+    if (!$report_id) {
         throw new Exception("Invalid report ID provided.");
     }
 
@@ -26,7 +29,7 @@ try {
 
     // Execute the query with prepared statement
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $reportId);
+    $stmt->bind_param("i", $report_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -34,10 +37,12 @@ try {
     $reportInfo = $result->fetch_assoc();
 
     if (!$reportInfo) {
-        throw new Exception("Report not found with ID: $reportId");
+        throw new Exception("Report not found with ID: $report_id");
     }
 
     // Extract report details
+    $userfirstName = $reportInfo['First_Name'];
+    $userlastName = $reportInfo['Last_Name'];
     $reportName = $reportInfo['reportCategory'];
     $unitAmount = $reportInfo['Price'];
 
@@ -46,8 +51,8 @@ try {
     // Create a checkout session with retrieved details
     $checkoutSession = \Stripe\Checkout\Session::create([
         "mode" => "payment",
-        "success_url" => "http://localhost/guader-html/success.php",
-        "cancel_url" => "http://localhost/guader-html/Report_History.php",
+        "success_url" => "http://localhost/guarder-html/success.php?report_id=<?php echo $report_id; ?>",
+        "cancel_url" => "http://localhost/guarder-html/Report_History.php",
         "locale" => "auto",
         "line_items" => [
             [
@@ -56,12 +61,14 @@ try {
                     "currency" => "MWK",
                     "unit_amount" => $amount_in_cents,
                     "product_data" => [
-                        "name" => $reportName
-                    ]
+                        "name" => $userfirstName . " " . $userlastName . " - " . $reportName
+                    ]                    
                 ]
             ]
         ]
     ]);
+
+
 
     // Redirect the user to the checkout session URL
     http_response_code(303);

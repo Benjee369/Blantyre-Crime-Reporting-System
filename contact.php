@@ -1,7 +1,25 @@
 <?php
-ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
+error_reporting(E_ALL);
 session_start();
+require_once 'DatabaseConn.php';
+$sent_success = $sent_fail = "";
+if ($_SERVER["REQUEST_METHOD"] === "POST") {  
+    $fullname = $_POST["fullname"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $message = $_POST["message"];
+
+    $query = "INSERT INTO contact_us (Full_Name, Email, Phone_Number, Description, Date) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ssss", $fullname, $email, $phone, $message);  
+    if ($stmt->execute()) {
+        $sent_success = "Your Message has been received";
+    } else {
+        $sent_fail = "Error: " . $stmt->error;
+    }
+    $stmt->close();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +50,7 @@ session_start();
     <header class="header_section">
     <?php
     require_once'nvbr.php'; 
-    ?>
+    ?>  
     </header>
     <!-- end header section -->
   </div>
@@ -54,25 +72,31 @@ session_start();
       <div class="">
         <div class="row">
           <div class="col-md-7 mx-auto">
-            <form action="#">
+            <form action="" method="POST">
               <div class="contact_form-container">
                 <div>
-                  <div>
-                    <input type="text" placeholder="Full Name" />
+                  <?php
+                    if (isset($sent_success)) {
+                        echo '<p class="pass">' . $sent_success . '</p>';
+                    }
+                    if (isset($sent_fail)) {
+                        echo '<p class="wrong_details">' . $sent_fail . '</p>';
+                    }
+                  ?>
+                  <div class="report_detail1">
+                    <input type="text" placeholder="Full Name" name="fullname"/>
                   </div>
-                  <div>
-                    <input type="email" placeholder="Email " />
+                  <div class="report_detail1">
+                    <input type="email" placeholder="Email " name="email"/>
                   </div>
-                  <div>
-                    <input type="text" placeholder="Phone Number" />
+                  <div class="report_detail1">
+                    <input type="text" placeholder="Phone Number" name="phone"/>
                   </div>
-                  <div class="">
-                    <input type="text" placeholder="Message" class="message_input" />
+                  <div  class="report_detail1">
+                    <input type="text" placeholder="Message" class="message_input" name="message"/>
                   </div>
                   <div class="btn-box ">
-                    <button type="submit">
-                      Send
-                    </button>
+                  <input class="contact_us_btn" type="submit" value="Submit" />
                   </div>
                 </div>
               </div>

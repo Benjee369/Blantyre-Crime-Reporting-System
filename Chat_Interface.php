@@ -93,9 +93,9 @@ if (isset($_POST['message'], $_POST['report_id'])) {
 
                     echo '<div class="chat-message ' . $messageClass . '">';
                     echo '<b class="chat-message-sender">' . $sender_name . '</b>';
+                    echo '<p>' . $row['created_at'] . '</p>';
                     echo '<p class="the-chat-message">' . $row['message'] . '</p>';
-                    echo '<span class="chat-message-timestamp">' . $row['created_at'] . '</span>';
-                echo '</div>';
+                    echo '</div>';
             }
 
             $stmt->close();

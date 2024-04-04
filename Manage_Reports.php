@@ -108,6 +108,10 @@ session_start();
                                     echo '<p>' . $incident_report['PriorityLevel'] . '</p>';
                                     echo '</td>';
                                     
+                                    echo '<td>';
+                                    echo '<a href="report_details.php?report_id=' . $incident_report['ID'] . '" class="">View Details</a>';
+                                    echo '</td>';
+                                    
                                     echo '</tr>';
                                 }
                             } else {

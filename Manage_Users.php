@@ -66,7 +66,7 @@ session_start();
                             echo '<p>'."<b>Phone Number: </b>".''.$user_detail['Phone_Number'].'</p>';
                             echo '<hr class="line-thing">';
                             echo '<p>'."<b>Location: </b>".''.$user_detail['Address'].'</p>';
-                            echo '<a class="btn btn-outline-primary take-btn">Block User</a>';
+                            // echo '<a class="btn btn-outline-primary take-btn">Block User</a>';
                             echo '</div>';
                         }
                     } else {
