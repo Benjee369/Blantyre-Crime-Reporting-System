@@ -51,8 +51,8 @@ try {
     // Create a checkout session with retrieved details
     $checkoutSession = \Stripe\Checkout\Session::create([
         "mode" => "payment",
-        "success_url" => "http://localhost/guarder-html/success.php?report_id=<?php echo $report_id; ?>",
-        "cancel_url" => "http://localhost/guarder-html/Report_History.php",
+        "success_url" => "http://localhost/Blantyre_Police_Reporting_System/success.php?report_id=<?php echo $report_id; ?>",
+        "cancel_url" => "http://localhost/Blantyre_Police_Reporting_System/Report_History.php",
         "locale" => "auto",
         "line_items" => [
             [

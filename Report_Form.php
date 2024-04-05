@@ -52,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error_message = "Error inserting incident report: " . $insertReportStmt->error;
         }
 
-         // Create and configure PHPMailer instance
          $mail = new PHPMailer();
          $mail->isSMTP();
          $mail->Host = 'smtp.gmail.com';
@@ -62,13 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $mail->SMTPSecure = 'ssl';
          $mail->Port = 465;
  
-         // Set email content
          $mail->setFrom('johnbanda15243@gmail.com', 'Your Name');
          $mail->addAddress('benjaminphiri369@gmail.com', 'Benjamin Phiri');
          $mail->Subject = 'New Police Report Submitted';
          $mail->Body = "A new police report has been submitted.\n\nFirst Name: $FirstName\nLast Name: $LastName\nIncident Category: $IncidentCategory\nWitnessed Date: $WitnessedDate\nDescription: $Description\nPeople Involved: $PeopleInvolved\nAffected: " . ($IfAffected ? 'Yes' : 'No') . "\nLocation: $Location";
  
-         // Send the email
          if ($mail->send()) {
              $success_message = "Incident report successfully submitted. The admin has been notified.";
          } else {
