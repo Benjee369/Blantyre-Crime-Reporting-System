@@ -24,6 +24,9 @@
                 <li>
                     <a href="Statistics.php"><i class="fa fa-calendar"></i> <span>Statistics</span></a>
                 </li>
+                <li>
+                    <a href="System_Reports.php"><i class="fa fa-calendar"></i> <span>Reports</span></a>
+                </li>
             </ul>
         </div>
     </div>

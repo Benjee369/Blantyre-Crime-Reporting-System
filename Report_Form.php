@@ -102,7 +102,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>Police Report Form</h1>
         
         <p>If you have witnessed an incident that falls under police attribution, please use this online police report form to signalize it.
-             The police will review the report and take the appropriate action. Thank you for being a responsible citizen.</p>
+             The police will review the report and take the appropriate action. Thank you for being a responsible citizen.
+            <br><b>
+              *Price of the Report Varies Depending on the Incident Category*
+            </b></p>
         <?php
             if (isset($success_message)) {
                 echo "<p class='success'>$success_message</p>";

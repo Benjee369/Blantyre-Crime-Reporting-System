@@ -74,7 +74,6 @@ session_start();
         </div>
       </div>
     </section>
-    <!-- end slider section -->
   </div>
   <!-- about section -->
 

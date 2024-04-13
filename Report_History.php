@@ -40,14 +40,14 @@ session_start();
 
                     require_once 'DatabaseConn.php';
 
-                    $query = "SELECT c.*, u.First_Name, u.Last_Name, a.Status, a.PaymentApproved, a.Paid, rp.Price
-                    FROM crimereports c
-                    INNER JOIN userdetails u ON u.ID = c.UserID
-                    LEFT JOIN assignments a ON c.ID = a.ReportID
-                    LEFT JOIN ReportPrice rp ON c.Incident_Category = rp.Category
-                    WHERE u.ID = ?
-                    ORDER BY c.SubmittedDate DESC                    
-                    ";
+                    $query = "SELECT c.*, u.First_Name AS User_First_Name, u.Last_Name AS User_Last_Name, a.Status, a.PaymentApproved, a.Paid, rp.Price
+          FROM crimereports c
+          INNER JOIN userdetails u ON u.ID = c.UserID
+          LEFT JOIN assignments a ON c.ID = a.ReportID
+          LEFT JOIN ReportPrice rp ON c.Incident_Category = rp.Category
+          WHERE u.ID = ?
+          ORDER BY c.SubmittedDate DESC";
+
                     
                 
                 $stmt = $conn->prepare($query);
@@ -61,8 +61,10 @@ session_start();
                     foreach ($incident_reports as $incident_report) {
                         echo '<tr>';
                         echo '<td style="min-width: 200px;">';
-                        echo '<p><b>' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '</b></h2>';
+                        echo '<p><b>' . $incident_report['User_First_Name'] . ' ' . $incident_report['User_Last_Name'] . '</b></h2>';
+                        echo '<p>Name on Report: ' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '</p>';
                         echo '</td>';
+
 
                         // echo '<td>';
                         // echo '<h5 class="time-title p-0">Coordinates</h5>';
@@ -125,5 +127,8 @@ session_start();
     require_once 'Footer.php';
     ?>
   </Footer>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/custom.js"></script>
 </body>
 </html>

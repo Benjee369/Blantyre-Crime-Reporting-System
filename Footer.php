@@ -2,7 +2,7 @@
       <div class="row">
         <div class="col-md-3">
           <div class="info_logo">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.php">
               <span>
                 Blantyre Police <br> Department
               </span>

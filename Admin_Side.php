@@ -9,7 +9,7 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <title>Admin Dashboard</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap2.min.css">
@@ -127,7 +127,8 @@ session_start();
                         $query = "SELECT * 
                         FROM crimereports 
                         WHERE ID 
-                        NOT IN (SELECT ReportID FROM assignments)";
+                        NOT IN (SELECT ReportID FROM assignments)
+                        ORDER BY ID desc";
                     
 
                     $stmt = $conn->prepare($query);
@@ -149,12 +150,12 @@ session_start();
                             echo '</td>';
 
                             echo '<td>';
-                            echo '<h5 class="time-title p-0">Incident Category</h5>';
-                            echo '<p>' . $incident_report['Incident_Category'] . '</p>';
+                            echo '<h5 class="time-title p-0">Location</h5>';
+                            echo '<p>' . $incident_report['Location'] . '</p>';
                             echo '</td>';
 
                             echo '<td>';
-                            echo '<h5 class="time-title p-0">Current Date</h5>';
+                            echo '<h5 class="time-title p-0">Date of Submission</h5>';
                             echo '<p>' . $incident_report['SubmittedDate'] . '</p>';
                             echo '</td>';
 
@@ -189,5 +190,8 @@ session_start();
     ?>
   </Footer> -->
   <!-- footer section -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/custom.js"></script>
 </body>
 </html>

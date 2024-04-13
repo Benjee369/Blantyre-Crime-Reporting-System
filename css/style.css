@@ -1,6 +1,6 @@
 @import url("font-awesome.min.css");
 body {
-  font-family: "Poppins", sans-serif;
+	font-family: 'Rubik', sans-serif;
   color: #0c0c0c;
   background-color: #ffffff;
 }
@@ -21,6 +21,12 @@ body {
 
 .layout_padding2-bottom {
   padding-bottom: 45px;
+}
+
+.assign-officer{
+  margin-top: 200px;
+  margin-left: 300px;
+  font-size: 20px;
 }
 
 .layout_padding-top {
@@ -1561,7 +1567,7 @@ form button[type=submit]{
   width: 66%;
 }
 .report_details {
-  font-family: Arial, sans-serif;
+	font-family: 'Rubik', sans-serif;
   width: 100%;
   background-color: #fff;
   margin: 0 auto;

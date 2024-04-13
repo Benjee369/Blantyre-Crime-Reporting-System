@@ -10,7 +10,7 @@
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Guarder</title>
+  <title>About Us</title>
 
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
   <link href="css/style.css" rel="stylesheet" />

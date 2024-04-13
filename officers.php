@@ -15,7 +15,7 @@ session_start();
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-  <title>Guarder</title>
+  <title>Our Officers</title>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
   <link href="css/style.css" rel="stylesheet" />
   <link href="css/responsive.css" rel="stylesheet" />

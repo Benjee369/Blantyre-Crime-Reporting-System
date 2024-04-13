@@ -23,7 +23,7 @@ session_start();
     require_once'nvbr.php'; 
     ?>
     </header>
-        <!-- nav2 end -->
+        <!-- nav2 end -->   
     <div class="main-wrapper">
         <!-- side bar thing -->
         <?php
@@ -35,51 +35,69 @@ session_start();
             <div class="content">
                 <div class="row">
                 </div>
-				
-				<div class="row">
-					<div class="main-card-thing">
-						<div class="card">
-							<div class="card-header">
-								<h4 class="card-title d-inline-block">View and Manage Users</h4>
-							</div>
-							<div class="user_details">
+                
+                <div class="row">
+                    <div class="main-card-thing">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title d-inline-block">View and Manage Users</h4>
+                            </div>
+                            <div class="user_details">
                             <?php
-                        require_once 'DatabaseConn.php';
+                            require_once 'DatabaseConn.php';
 
-                        $query = "SELECT *
-                    FROM userdetails";
-                    
+                            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_user'])) {
+                                $user_id = $_POST['user_id'];
 
-                    $stmt = $conn->prepare($query);
-                    $stmt->execute();
+                                // Prepare a DELETE statement
+                                $delete_query = "DELETE FROM userdetails WHERE ID = ?";
+                                $delete_stmt = $conn->prepare($delete_query);
+                                $delete_stmt->bind_param("i", $user_id);
 
-                    $result = $stmt->get_result();
+                                // Execute the DELETE statement
+                                if ($delete_stmt->execute()) {
+                                    echo '<div class="alert alert-success" role="alert">User deleted successfully</div>';
+                                } else {
+                                    echo '<div class="alert alert-danger" role="alert">Error deleting user</div>';
+                                }
 
-                    if ($result->num_rows > 0) {
-                        $user_details = $result->fetch_all(MYSQLI_ASSOC);
-                        foreach ($user_details as $user_detail) {
-                            echo '<div class="u_details">';
-                            echo '<h1>'.$user_detail['First_Name'] . ' ' . $user_detail['Last_Name'] .'</h1>';
-                            echo '<hr class="line-thing">';
-                            echo '<p>'."<b>Email: </b>".''.$user_detail['Email_Address'].'</p>';
-                            echo '<hr class="line-thing">';
-                            echo '<p>'."<b>Phone Number: </b>".''.$user_detail['Phone_Number'].'</p>';
-                            echo '<hr class="line-thing">';
-                            echo '<p>'."<b>Location: </b>".''.$user_detail['Address'].'</p>';
-                            // echo '<a class="btn btn-outline-primary take-btn">Block User</a>';
-                            echo '</div>';
-                        }
-                    } else {
-                        echo '<p class="no_review">No Reviews available at the moment,<br>
-                        Be the first To leave a Review.</p>';
-                    }
-                    $stmt->close();
-                    $conn->close();            
-                    ?>
-							</div>
-						</div>
-					</div>
-				</div>
+                                // Close the prepared statement
+                                $delete_stmt->close();
+                            }
+
+                            $query = "SELECT * FROM userdetails";
+                            $stmt = $conn->prepare($query);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            if ($result->num_rows > 0) {
+                                while ($user_detail = $result->fetch_assoc()) {
+                                    echo '<div class="u_details">';
+                                    echo '<h1>' . $user_detail['First_Name'] . ' ' . $user_detail['Last_Name'] . '</h1>';
+                                    echo '<hr class="line-thing">';
+                                    echo '<p><b>Email:</b> ' . $user_detail['Email_Address'] . '</p>';
+                                    echo '<hr class="line-thing">';
+                                    echo '<p><b>Phone Number:</b> ' . $user_detail['Phone_Number'] . '</p>';
+                                    echo '<hr class="line-thing">';
+                                    echo '<p><b>Location:</b> ' . $user_detail['Address'] . '</p>';
+                                    echo '<form method="post">';
+                                    echo '<input type="hidden" name="user_id" value="' . $user_detail['ID'] . '">';
+                                    echo '<button type="submit" name="delete_user" class="btn btn-outline-primary take-btn">Delete User</button>';
+                                    echo '</form>';
+                                    echo '</div>';
+                                }
+                            } else {
+                                echo '<p class="no_review">No users available in the system as of now</p>';
+                            }
+
+                            // Close the prepared statement and database connection
+                            $stmt->close();
+                            $conn->close();
+                            ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
