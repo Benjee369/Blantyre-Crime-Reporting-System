@@ -3,6 +3,11 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="menu-title">Main</li>
+                <?php
+                        if (isset($_SESSION['officer_id'])) {
+                            echo "<p>Welcome, Officer ID: " . $_SESSION['officer_id'] . "</p>";
+                        }
+                    ?>
                 <li class="active">
                     <a href="Officer_Side.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                 </li>

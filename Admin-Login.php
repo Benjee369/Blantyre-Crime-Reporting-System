@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
             // Set the officer ID in the session variable
             $_SESSION["officer_id"] = $officerId;
-        
+            $_SESSION['officer_email'] = $Email_Address;
             $_SESSION["isloggedin"] = true;
             $_SESSION["invalidCredentials"] = false;
             // Redirect to the officer's dashboard

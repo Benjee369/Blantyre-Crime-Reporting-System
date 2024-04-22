@@ -8,7 +8,7 @@
               </span>
             </a>
             <p>
-              dolor sit amet, consectetur magna aliqua. Ut enim ad minim veniam, quisdotempor incididunt r
+            Empowering communities through vigilance, integrity, and collaborative crime reporting solutions.
             </p>
           </div>
         </div>
@@ -19,23 +19,18 @@
             </h5>
             <ul>
               <li>
-                <a href="">
-                  dolor sit amet, consectetur
+                <a href="https://web.facebook.com/malawipolice">
+                  Facebook
                 </a>
               </li>
               <li>
-                <a href="">
-                  magna aliqua. Ut enim ad
+                <a href="https://twitter.com/malawi_police">
+                  Twitter                
                 </a>
               </li>
               <li>
-                <a href="">
-                  minim veniam,
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  quisdotempor incididunt r
+                <a href="https://www.instagram.com/malawipoliceservice">
+                 Instagram
                 </a>
               </li>
             </ul>

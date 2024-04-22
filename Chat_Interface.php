@@ -81,7 +81,7 @@ if (isset($_POST['message'], $_POST['report_id'])) {
 
                 $report_id = $_GET['report_id'];
 
-                $query = "SELECT * FROM chats WHERE report_id = ?";
+                $query = "SELECT * FROM chats WHERE report_id = ? ORDER BY id asc";
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("i", $report_id);
                 $stmt->execute();

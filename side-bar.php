@@ -22,10 +22,13 @@
                     <a href="Manage_Officers.php"><i class="fa fa-user-secret"></i> <span>Officers</span></a>
                 </li>
                 <li>
-                    <a href="Statistics.php"><i class="fa fa-calendar"></i> <span>Statistics</span></a>
+                    <a href="Statistics.php"><i class="fa fa-bar-chart"></i> <span>Statistics</span></a>
                 </li>
                 <li>
-                    <a href="System_Reports.php"><i class="fa fa-calendar"></i> <span>Reports</span></a>
+                    <a href="System_Reports.php"><i class="fa fa-check-circle"></i> <span>Reports</span></a>
+                </li>
+                <li>
+                    <a href="Officer_Reports.php"><i class="fa fa-list-alt"></i> <span>Officer Reports</span></a>
                 </li>
             </ul>
         </div>

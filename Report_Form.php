@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         require_once 'DatabaseConn.php';
 
+        //Code used to retrieve information from the user input boxes
         $FirstName = $_POST["firstname"] ?? null;
         $LastName = $_POST["lastname"] ?? null;
         $IncidentCategory = $_POST["incidentCategory"] ?? null;
@@ -27,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $IfAffected = isset($_POST["ifAffected"]) ? 1 : 0;
         $Location = $_POST["coordinates"] ?? null;
 
+        //Code used to allow multiple media types on the form
         $Multimedia = "";
         if (isset($_FILES["file"])) {
             $fileTmpPath = $_FILES["file"]["tmp_name"];
@@ -43,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $Multimedia = $uploadPath;
         }
         
+        //Code used to insert report detials into database
         $insertReportStmt = $conn->prepare("INSERT INTO crimereports (UserID, First_Name, Last_Name, Incident_Category, SubmittedDate, WitnessedDate, Description, People_Involved, If_Affected, Multimedia, Location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $insertReportStmt->bind_param("issssssiiss", $UserID, $FirstName, $LastName, $IncidentCategory, $CurrentDate, $WitnessedDate, $Description, $PeopleInvolved, $IfAffected, $Multimedia, $Location);
 
@@ -52,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error_message = "Error inserting incident report: " . $insertReportStmt->error;
         }
 
+        //PHP mailer details
          $mail = new PHPMailer();
          $mail->isSMTP();
          $mail->Host = 'smtp.gmail.com';
@@ -60,8 +64,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $mail->Password = 'ortk mwod jnkf pbif';
          $mail->SMTPSecure = 'ssl';
          $mail->Port = 465;
- 
-         $mail->setFrom('johnbanda15243@gmail.com', 'Your Name');
+        
+         //Code used to send email to admin
+         $mail->setFrom('johnbanda15243@gmail.com', 'Your Name');//This is the admin email
          $mail->addAddress('benjaminphiri369@gmail.com', 'Benjamin Phiri');
          $mail->Subject = 'New Police Report Submitted';
          $mail->Body = "A new police report has been submitted.\n\nFirst Name: $FirstName\nLast Name: $LastName\nIncident Category: $IncidentCategory\nWitnessed Date: $WitnessedDate\nDescription: $Description\nPeople Involved: $PeopleInvolved\nAffected: " . ($IfAffected ? 'Yes' : 'No') . "\nLocation: $Location";
@@ -74,6 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $insertReportStmt->close();
         $conn->close();
+
+        //Notify user of invaid media format
     } catch (Exception $e) {
       $error_message = "Invalid video format.";
   }  
@@ -106,6 +113,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br><b>
               *Price of the Report Varies Depending on the Incident Category*
             </b></p>
+
+            <!-- Used to notify user of successful or unsuccesful submission -->
         <?php
             if (isset($success_message)) {
                 echo "<p class='success'>$success_message</p>";
@@ -113,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($error_message)) {
                 echo "<p class='wrong_details'>$error_message</p>";
             }
-            ?>
+        ?>
           <div class="report-detail">
 
           <form action="" method="post" enctype="multipart/form-data">
@@ -196,6 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php require_once 'Footer.php'; ?>
     </footer>
 
+    <!-- Code to show Location map on the report form -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         var map = L.map('map').setView([-15.759612, 35.022580], 12);
@@ -216,7 +226,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         map.on('click', onMapClick);
     </script>
-  <!-- <script src="js/mapAPI.js" defer></script> -->
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.js"></script>
   <script src="js/custom.js"></script>

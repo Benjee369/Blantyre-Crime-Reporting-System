@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 08, 2024 at 12:51 PM
+-- Generation Time: Apr 16, 2024 at 02:03 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -69,23 +69,14 @@ CREATE TABLE IF NOT EXISTS `assignments` (
   PRIMARY KEY (`AssignmentID`),
   KEY `ReportID` (`ReportID`),
   KEY `OfficerID` (`OfficerID`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `assignments`
 --
 
 INSERT INTO `assignments` (`AssignmentID`, `ReportID`, `OfficerID`, `PriorityLevel`, `Status`, `AssignedDate`, `CompletionDate`, `PaymentApproved`, `Paid`, `Notes`) VALUES
-(18, 21, 2, 'Low', 'Reopened', '2024-03-28', NULL, 1, 0, NULL),
-(19, 23, 4, 'High', 'Closed', '2024-04-02', NULL, 1, 1, NULL),
-(20, 22, 2, 'High', 'In Progress', '2024-04-02', NULL, 1, 1, NULL),
-(21, 25, 2, 'High', 'In Progress', '2024-04-03', NULL, 1, 0, NULL),
-(22, 24, 5, 'High', 'Reopened', '2024-04-03', NULL, 1, 1, NULL),
-(23, 27, 2, 'High', 'Closed', '2024-04-04', NULL, 1, 1, NULL),
-(24, 28, 5, 'Medium', 'Closed', '2024-04-04', NULL, 1, 1, NULL),
-(25, 30, 5, 'High', 'In Progress', '2024-04-05', NULL, 1, 1, NULL),
-(26, 29, 2, 'Medium', 'In Progress', '2024-04-05', NULL, 0, 0, NULL),
-(27, 31, 4, 'Medium', 'In Progress', '2024-04-05', NULL, 1, 1, NULL);
+(46, 33, 2, 'High', 'In Progress', '2024-04-13', NULL, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -105,25 +96,15 @@ CREATE TABLE IF NOT EXISTS `chats` (
   PRIMARY KEY (`id`),
   KEY `report_id` (`report_id`),
   KEY `sender_id` (`sender_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `chats`
 --
 
 INSERT INTO `chats` (`id`, `report_id`, `sender_id`, `sender_name`, `message`, `sender_type`, `created_at`) VALUES
-(18, 31, 4, 'Officer', 'hey back to ya!', '', '2024-04-08 12:21:47'),
-(17, 31, 16, 'User', 'hello', '', '2024-04-08 12:21:30'),
-(16, 28, 15, 'User', 'i am user john', '', '2024-04-04 13:29:33'),
-(15, 28, 5, 'Officer', 'i am officer benjamin', '', '2024-04-04 13:29:21'),
-(14, 27, 14, 'User', 'i am a user', '', '2024-04-04 12:02:54'),
-(13, 27, 2, 'Officer', 'i am a officer', '', '2024-04-04 12:02:36'),
-(12, 24, 12, 'User', 'im am user', '', '2024-04-04 07:54:47'),
-(19, 31, 16, 'User', 'so how\'s you doing?', '', '2024-04-08 12:22:10'),
-(20, 31, 4, 'Officer', 'good good\r\nbut i guess i can\'t say the same about you', '', '2024-04-08 12:22:37'),
-(21, 31, 16, 'User', 'ye man\r\ngot stabbed in the back', '', '2024-04-08 12:22:56'),
-(22, 31, 4, 'Officer', 'been there, done that', '', '2024-04-08 12:23:10'),
-(23, 31, 16, 'User', 'ha ha\r\nsow will you help me or not? ', '', '2024-04-08 12:23:42');
+(37, 33, 2, 'Officer', 'Hello I am Officer John', '', '2024-04-13 23:19:34'),
+(36, 33, 13, 'User', 'Hello I am user Tebogho', '', '2024-04-13 23:19:22');
 
 -- --------------------------------------------------------
 
@@ -165,19 +146,20 @@ CREATE TABLE IF NOT EXISTS `crimereports` (
   `Incident_Category` varchar(20) NOT NULL,
   `SubmittedDate` timestamp(6) NOT NULL,
   `WitnessedDate` date NOT NULL,
-  `Description` varchar(100) NOT NULL,
+  `Description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `People_Involved` int NOT NULL,
   `If_Affected` int NOT NULL,
   `Multimedia` varchar(255) NOT NULL,
   `Location` varchar(200) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `crimereports`
 --
 
 INSERT INTO `crimereports` (`ID`, `UserID`, `First_Name`, `Last_Name`, `Incident_Category`, `SubmittedDate`, `WitnessedDate`, `Description`, `People_Involved`, `If_Affected`, `Multimedia`, `Location`) VALUES
+(32, 13, 'Tebogho', 'Msuku', 'Theft', '2024-04-12 05:33:45.000000', '2024-04-12', 'I was robbed of my laptop bag which contained my laptop and its charger. The crime happened around B', 1, 1, 'ReportMultimedia/laptop_bag.png', '-15.788546, 35.007317'),
 (31, 16, 'Lwendo', 'Chawera', 'Missing Person', '2024-04-05 06:35:23.000000', '2024-04-02', 'My eldest son has been missing for 4 days', 1, 1, 'ReportMultimedia/IMG_20220915_130306.jpg', '-15.743244, 34.975376'),
 (30, 15, 'fredrick', 'jamu', 'Theft', '2024-04-05 05:40:05.000000', '2024-04-10', 'hh', 1, 1, 'ReportMultimedia/IMG_20221206_014128.jpg', '-15.797649, 35.042324'),
 (29, 15, 'fredrick', 'jamu', 'Theft', '2024-04-05 05:37:54.000000', '2024-04-13', 'anamaskini', 2, 1, 'ReportMultimedia/IMG_20221206_014353.jpg', '-15.813699, 35.065370'),
@@ -188,7 +170,7 @@ INSERT INTO `crimereports` (`ID`, `UserID`, `First_Name`, `Last_Name`, `Incident
 (24, 12, 'Racheal', 'Kapakasa', 'Vandalism', '2024-04-02 09:27:46.000000', '2024-04-27', 'my house was vandaled mazulo', 3, 1, 'ReportMultimedia/IMG_20221010_064049.jpg', '-15.759612, 35.022580'),
 (23, 12, 'Lisa', 'Gulumba', 'Missing Person', '2024-04-02 04:08:14.000000', '2024-04-04', 'the person was last seen near queens, wearing a blue shirt', 1, 1, 'ReportMultimedia/IMG_20220915_130306.jpg', '-15.800960, 35.021959'),
 (22, 12, 'john', 'banda', 'Vandalism', '2024-04-01 18:31:27.000000', '2024-04-19', 'my house was vandalized around 12 midnight ', 1, 1, 'ReportMultimedia/F1Gl76HXsAUgcki.jpg', '51.498164, -0.093527'),
-(21, 12, 'benjamin', 'phiri', 'Missing Identity Car', '2024-03-28 06:26:36.000000', '2024-03-28', 'Last place I saw my National ID was when I was at Road Traffic', 1, 1, 'ReportMultimedia/Campground_at_Tidal_River.jpg', '');
+(33, 13, 'Tebogho', 'Msuku', 'Theft', '2024-04-12 05:43:41.000000', '2024-04-12', 'I was robbed of my laptop bag which contained my laptop and its charger. The crime happened around Blantyre, Mibawa, the person I saw was wearing a red shirt and a blue jean trouser.', 1, 1, 'ReportMultimedia/laptop_bag.png', '-15.788566, 35.007317');
 
 -- --------------------------------------------------------
 

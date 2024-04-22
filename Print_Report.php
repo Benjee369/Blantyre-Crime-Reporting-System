@@ -119,10 +119,6 @@ session_start();
                                     <br>  
                             </div>
                         </div>
-                        <!--Where the report_details controls go-->
-                        
-                    
-
                     <div class="">
                         <div class="card member-panel">
 							<div class="card-header bg-white">
@@ -248,15 +244,12 @@ session_start();
         </div>    
         <script>
         document.getElementById("printReport").addEventListener("click", function() {
-    printReport();
+        printReport();
         });
 
         function printReport() {
-            // Open a new window for printing
             var printWindow = window.open('', '_blank');
-            // Get the content of the report container
             var reportContent = document.getElementById("reportContainer").innerHTML;
-            // Include CSS styles
             var styles = document.head.getElementsByTagName("link");
             var styleContent = '';
             for (var i = 0; i < styles.length; i++) {
@@ -264,11 +257,8 @@ session_start();
                     styleContent += styles[i].outerHTML;
                 }
             }
-            // Write the content and styles into the new window
             printWindow.document.write('<html><head><title>Report</title>' + styleContent + '</head><body>' + reportContent + '</body></html>');
-            // Close the document after printing
             printWindow.document.close();
-            // Print the window
             printWindow.print();
         }
         </script>

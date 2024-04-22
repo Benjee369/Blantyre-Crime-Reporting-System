@@ -6,13 +6,12 @@ session_start();
 require __DIR__ . "/vendor/autoload.php";
 require_once 'DatabaseConn.php';
 
-// Assuming the Stripe secret key is stored securely in an environment variable
 $stripe_secret_key = "sk_test_51P0hxTEdiO8lrsXZW35QYB0qJUaRKXPeskukHB73OUGsFN9JQf8wJ7Lbw6NSD9wLbL5l9kSKWnVEkSvKEVB2pmlg00FOMLVoZw";
 
 try {
     \Stripe\Stripe::setApiKey($stripe_secret_key);
 
-    // Extract report ID from request (adjust based on your implementation)
+    // Extract report ID from request
     $report_id = filter_var($_GET['report_id'], FILTER_SANITIZE_NUMBER_INT); // Sanitize input
 
     if (!$report_id) {
@@ -67,8 +66,6 @@ try {
             ]
         ]
     ]);
-
-
 
     // Redirect the user to the checkout session URL
     http_response_code(303);

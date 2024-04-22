@@ -735,6 +735,18 @@ textarea.form-control {
 	color: #fff;
 	padding: 0;
 }
+.report-section {
+	background-color: #fff;
+	margin-bottom: 20px;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.main2-wrapper{
+	margin-left: 246px;
+	margin-top: 98px;
+	padding: 5px;
+}
 .mobile-user-menu > a:hover {
 	color: #fff;
 }
@@ -790,6 +802,12 @@ textarea.form-control {
 }
 .sidebar-menu > ul > li {
 	position: relative;
+}
+
+.generatebtn{
+	border: 1px solid black;
+	border-radius: 4px;
+	margin-top: 10px;
 }
 .sidebar-menu .menu-arrow {
 	-webkit-transition: -webkit-transform 0.15s;

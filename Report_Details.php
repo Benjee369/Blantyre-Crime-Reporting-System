@@ -132,6 +132,7 @@ session_start();
                             if(isset($_SESSION['officer_id'])){
                             ?>
                             <?php
+                            //Code to approve payment of a report
                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     require_once 'DatabaseConn.php';
                                     $report_id = isset($_POST['report_id']) ? $_POST['report_id'] : null;
@@ -158,6 +159,7 @@ session_start();
                                     if (isset($_POST['update_status'])) {
                                         $status = isset($_POST['status']) ? $_POST['status'] : null;
 
+                                        //Update status of report
                                         if ($report_id !== null && $status !== null) {
                                             $query = "UPDATE assignments SET Status = ? WHERE ReportID = ?";
                                             $stmt = $conn->prepare($query);
@@ -186,7 +188,7 @@ session_start();
                                     <div class="approve_payment">
                                         <form method="post">
                                             <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
-                                            <input type="hidden" name="approve_payment" value="1"> <!-- Add this hidden input field -->
+                                            <input type="hidden" name="approve_payment" value="1">
                                             <input type="submit" class="btn btn-primary float-right" value="Approve for Payment">
                                         </form>
                                     </div>
@@ -195,7 +197,7 @@ session_start();
                                 <div class="update_status">
                                     <form method="post">
                                         <input type="hidden" name="report_id" value="<?php echo $report_id; ?>">
-                                        <input type="hidden" name="update_status" value="1"> <!-- Add this hidden input field -->
+                                        <input type="hidden" name="update_status" value="1">
                                         <label for="status">Update Status of Report:</label>
                                         <select name="status" required>
                                             <option value="">Select Status</option>
@@ -206,6 +208,7 @@ session_start();
                                         <input class="btn btn-primary float-right" type="submit" value="Update Status">
                                     </form>
                                 </div>
+                                <!-- Show only when admin is logged in -->
                                 <?php
                                 } elseif(isset($_SESSION['admin_id'])){
                                 ?>
@@ -215,6 +218,7 @@ session_start();
                                     <select name="officer_id" required>
                                         <option value="">Select Officer</option>
                                         <?php
+                                        //Select all oficers in the system and display them in combo box
                                         require_once 'DatabaseConn.php';
                                         $query = "SELECT ID, Email FROM admindetails WHERE Role = 'officer'";
                                         $stmt = $conn->prepare($query);
@@ -230,6 +234,7 @@ session_start();
 
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+                                    <!-- Display all the priority levels in a combo box -->
                                     <label for="priority_level">Priority Level:</label>
                                     <select name="priority_level" required>
                                         <option value="">Select Priority Level</option>
@@ -252,6 +257,7 @@ session_start();
 							</div>
                             <div class="card-body">
                             <?php
+                            //Code to select multimedia for the report and to display it
                                 require_once 'DatabaseConn.php';
 
                                 $report_id = isset($_GET['report_id']) ? $_GET['report_id'] : null;
@@ -302,6 +308,7 @@ session_start();
 								<h4 class="card-title mb-0">Incident Location</h4>
 							</div>
                             <?php
+                            //Select coordinates for specific report and display them on a map
                             $conn = new mysqli('localhost', 'root', '', 'crime_reporting_system');
 
                             if ($conn->connect_error) {

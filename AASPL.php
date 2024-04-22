@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $priority_level = $_POST['priority_level'];
     $assigned_date = date("Y-m-d H:i:s");
 
+    //Code to assign select offficer to specific report
     $query = "INSERT INTO assignments (ReportID, OfficerID, PriorityLevel, Status, AssignedDate) VALUES (?, ?, ?, 'In Progress', ?)";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("iiss", $report_id, $officer_id, $priority_level, $assigned_date);

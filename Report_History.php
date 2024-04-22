@@ -62,7 +62,7 @@ session_start();
                         echo '<tr>';
                         echo '<td style="min-width: 200px;">';
                         echo '<p><b>' . $incident_report['User_First_Name'] . ' ' . $incident_report['User_Last_Name'] . '</b></h2>';
-                        echo '<p>Name on Report: ' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '</p>';
+                        echo '<p>Name on the Report: ' . $incident_report['First_Name'] . ' ' . $incident_report['Last_Name'] . '</p>';
                         echo '</td>';
 
 
