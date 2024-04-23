@@ -2,7 +2,14 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
+
 require_once 'DatabaseConn.php';
+
+if (!isset($_SESSION["isloggedin"])) {
+  header("Location: Login.php");
+  exit();
+}
+
 $sent_success = $sent_fail = "";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {  
     $fullname = $_POST["fullname"];

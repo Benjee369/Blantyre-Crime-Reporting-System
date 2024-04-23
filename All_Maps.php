@@ -3,6 +3,10 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
+if (!isset($_SESSION["isloggedin"])) {
+    header("Location: Admin-Login.php");
+    exit();
+}
 // Connect to the database (replace with your actual connection details)
 $conn = new mysqli('localhost', 'root', '', 'crime_reporting_system');
 

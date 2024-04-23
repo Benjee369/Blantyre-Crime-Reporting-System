@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION["isloggedin"])) {
+    header("Location: Login.php");
+    exit();
+}
 function getSenderInfo() {
     if (isset($_SESSION["officer_id"])) {
         $sender_type = 'officer';
